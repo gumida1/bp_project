@@ -1,0 +1,46 @@
+<template>
+  <div class="navbar">
+    <div class="list_pages">
+      <New_page v-for="index in page_counter" :key="index" :new="false"/>
+    </div>
+    <New_page :p_c="page_counter" :new_p="true" @click="new_page()"/>
+  </div>
+
+</template>
+
+<script>
+import New_page from './New_page.vue'
+export default {
+  components: { New_page },
+  data() {
+    return {
+      page_counter : 0
+    }
+  },
+  methods: {
+    new_page() {
+      this.page_counter++
+      console.log(this.page_counter)
+    }
+  }
+}
+
+
+</script>
+
+<style>
+.navbar {
+  background-color: #1e549f;
+  overflow: auto;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #081f37;
+}
+
+.list_pages {
+  width: 80%;
+  padding: 7px;
+}
+</style>
