@@ -1,10 +1,10 @@
 <template>
   <div class="card">
     <div v-if="new_p">
-      <i class="bi bi-plus-circle" style="font-size: 60px"></i>
+      <i class="bi bi-plus-circle" style="font-size: 60px; color: #081f37"></i>
     </div>
     <div v-if="!new_p">
-      {{index}}
+      <p>{{index}}</p>
     </div>
   </div>
 </template>
