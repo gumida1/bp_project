@@ -3,12 +3,15 @@
     <div v-if="new_p">
       <i class="bi bi-plus-circle" style="font-size: 60px"></i>
     </div>
+    <div v-if="!new_p">
+      {{index}}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['p_c', 'new_p'],
+  props: ['p_c', 'new_p', 'index'],
 }
 </script>
 

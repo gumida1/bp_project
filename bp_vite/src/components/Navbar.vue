@@ -1,11 +1,10 @@
 <template>
   <div class="navbar">
     <div class="list_pages">
-      <New_page v-for="index in page_counter" :key="index" :new="false"/>
+      <New_page v-for="index in page_counter" :key="index" :new_p="false" @click="logovani(index)" :index="index"/>
     </div>
     <New_page :p_c="page_counter" :new_p="true" @click="new_page()"/>
   </div>
-
 </template>
 
 <script>
@@ -21,17 +20,18 @@ export default {
     new_page() {
       this.page_counter++
       console.log(this.page_counter)
+    },
+    logovani(ind) {
+      console.log(ind)
     }
   }
 }
-
 
 </script>
 
 <style>
 .navbar {
   background-color: #1e549f;
-  overflow: auto;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -40,6 +40,9 @@ export default {
 }
 
 .list_pages {
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
   width: 80%;
   padding: 7px;
 }
