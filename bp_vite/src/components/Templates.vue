@@ -3,7 +3,7 @@
     <h6>Výběr šablony</h6>
     <div class="row">
       <div class="resize">
-        <img @click="print_log()" class="rounded float-left" v-for="img in images" v-bind:src="img"/>
+        <img @click="print_log()" class="rounded" v-for="img in images" v-bind:src="img"/>
       </div>
     </div>
   </div>
@@ -37,13 +37,13 @@ export default {
     }
   }
 }
-
-
 </script>
+
 
 <style>
 
 .panel {
+  overflow: auto;
   min-height: 395px;
   height: 50%;
   max-width: 18%;
@@ -53,13 +53,13 @@ export default {
 }
 
 .resize {
-  width: 10px;
+
 }
 
 img{
-  padding: 2px;
+  padding: 3px;
   float: left;
-  display: block;
-  width: 20%;
+  //display: block;
+  width: 25%;
 }
 </style>
