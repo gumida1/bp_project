@@ -1,11 +1,9 @@
 <template>
   <div class="panel">
-    <h6>Výběr šablony</h6>
-    <div class="row">
-      <div class="resize">
-        <img @click="print_log()" class="rounded" v-for="img in images" v-bind:src="img"/>
-      </div>
+    <div>
+      <h6>Výběr šablony</h6>
     </div>
+      <img @click="print_log(img)" class="rounded" v-for="img in images" v-bind:src="img"/>
   </div>
 
 </template>
@@ -27,8 +25,8 @@ import Img_T_1 from '../assets/sablona_t_1-1.png'
 
 export default {
   methods: {
-    print_log() {
-     console.log('clicked')
+    print_log(img) {
+     console.log(img)
     }
   },
   data() {
@@ -52,14 +50,12 @@ export default {
   border: 3px solid #081f37;
 }
 
-.resize {
-
+img{
+  padding: 4px;
+  width: 25%;
 }
 
-img{
-  padding: 3px;
-  float: left;
-  //display: block;
-  width: 25%;
+.cont {
+  overflow: auto !important;
 }
 </style>
