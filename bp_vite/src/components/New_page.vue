@@ -21,10 +21,14 @@ export default {
       chng_border : false
     }
   },
-  props: ['p_c', 'new_p', 'index', 'clicked'],
+  props: ['p_c', 'new_p', 'index', 'clicked', 'list'],
   methods: {
     change_style() {
-      this.chng_border = !this.chng_border
+      for (let i of this.list) {
+        i.active = i.c_stranky === this.index;
+      }
+      console.log(this.list);
+      //this.chng_border = !this.chng_border
     }
   }
 }
