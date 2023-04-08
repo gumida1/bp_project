@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="list_pages">
-      <New_page v-for="index in page_counter" :key="index" :new_p="false" @click="logovani(index)" :index="index" :list="page_arr"/>
+      <New_page v-for="index in page_counter" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
     </div>
     <New_page :p_c="page_counter" :new_p="true" @click="new_page()"/>
   </div>
@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       page_counter : 0,
-      page_arr : []
+      page_arr : [],
+      active_index: 0
     }
   },
   methods: {
@@ -23,10 +24,14 @@ export default {
       this.page_counter++
       let page = new page_info(this.page_counter, false)
       this.page_arr.push(page)
+      console.log(this.active_index)
     },
-    logovani(ind) {
-      console.log(ind)
-      console.log(this.$refs.ind);
+    is_active(index) {
+      return index === this.active_index
+    },
+    foo(index) {
+      this.active_index = index
+      console.log(this.active_index)
     }
   }
 }

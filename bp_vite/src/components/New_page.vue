@@ -1,7 +1,7 @@
 <template>
   <div class="pad">
     <div class="card" @click="change_style()" :style="{
-        backgroundColor: chng_border ? 'red' : '#5fc9f3'
+        backgroundColor: is_active ? 'red' : '#5fc9f3'
       }" v-if="!new_p">
       <p>{{index}}</p>
     </div>
@@ -18,17 +18,18 @@
 export default {
   data() {
     return {
-      chng_border : false
+      //chng_border : false
     }
   },
-  props: ['p_c', 'new_p', 'index', 'clicked', 'list'],
+  props: ['p_c', 'new_p', 'index', 'list', 'is_active'],
+  emits: ['clicked'],
   methods: {
     change_style() {
-      for (let i of this.list) {
+      /*for (let i of this.list) {
         i.active = i.c_stranky === this.index;
-      }
-      console.log(this.list);
-      //this.chng_border = !this.chng_border
+      }*/
+      //console.log(this.list);
+      this.$emit('clicked', this.index)
     }
   }
 }
