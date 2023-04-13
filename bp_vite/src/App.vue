@@ -4,10 +4,11 @@ import Panel from './components/Panel.vue'
 import Templates from './components/Templates.vue'
 import Navbar from './components/Navbar.vue'
 import Side_panel from './components/Side_panel.vue'
+import Main_workspace from './components/Main_workspace.vue'
 
 export default defineComponent( {
   name: 'App',
-  components: { Panel,  Templates, Navbar, Side_panel },
+  components: { Panel,  Templates, Navbar, Side_panel, Main_workspace },
   methods: {
 
   }
@@ -16,15 +17,18 @@ export default defineComponent( {
 console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}!`)
 </script>
 
+
 <template>
 <div class="app">
-  <div class="topcorner">
+  <div class="left_side">
     <Panel/>
     <Templates/>
   </div>
 
-  <div>
-    <Side_panel/>
+  <Side_panel/>
+
+  <div class="mid_center">
+    <Main_workspace/>
   </div>
 
   <div class="botcorner">
@@ -40,10 +44,11 @@ console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}
   top:0;
   left:0;
   height: 87%;
+  float: left;
 }
 
 .botcorner{
-  position: absolute;
+  position: sticky;
   min-height: 110px;
   bottom:0;
   left:0;
@@ -51,4 +56,18 @@ console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}
   height: 13%;
 }
 
+.left_side {
+  width: 19%;
+  display: inline-block;
+  float: left;
+}
+
+.mid_center {
+  transform: scale(0.75);
+  transform-origin: top;
+  width: 203mm;
+  height: 297mm;
+  //min-height: 297mm;
+  margin: 0 auto;
+}
 </style>

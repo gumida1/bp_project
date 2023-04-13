@@ -44,10 +44,11 @@ export default {
   overflow: auto;
   min-height: 395px;
   height: 50%;
-  max-width: 18%;
-  min-width: 203px;
+  width: 100%;
+  //min-width: 203px;
   background: #1e549f;
   border: 3px solid #081f37;
+  //float: left;
 }
 
 img{

@@ -1,5 +1,5 @@
 <template>
-  <div class="panel">
+  <div class="panel1">
     <h6>Informace o případu</h6>
     <form>
       <div class="form-group">
@@ -20,7 +20,7 @@
       </div>
       <br>
       <div class="mx-auto" style="width: 123px;">
-        <input type="checkbox" data-toggle="switchbutton" checked data-onlabel="Uzamknout" data-offlabel="Odemknout" data-size="sm" data-onstyle="success" data-offstyle="danger" v-model="locked">
+        <input type="checkbox" data-toggle="switchbutton" checked data-onlabel="Uzamknout" data-offlabel="Odemknout" data-size="sm" data-onstyle="success" data-offstyle="danger" v-model="locked" @click="save_data()">
       </div>
     </form>
   </div>
@@ -54,8 +54,12 @@ export default {
       if (this.inf.j_vyhotovitel !== '') {
         this.inf.j_zpracovatel = this.inf.j_vyhotovitel
       }
+    },
+    save_data() {
+      this.$emit('information', this.inf)
     }
-  }
+  },
+  emits: ['information']
 }
 
 </script>
@@ -90,6 +94,21 @@ h6 {
 
 .btn {
   background-color: #5fc9f3 !important;
+}
+
+.panel1 {
+  overflow: auto;
+  min-height: 395px;
+  //height: 50%;
+  //max-width: 18%;
+  //min-width: 203px;
+  width: 100%;
+  background: #1e549f;
+  border: 3px solid #081f37;
+  top: 0;
+  left: 0;
+  //float: left;
+  //position: relative;
 }
 
 

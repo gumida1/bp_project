@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog, globalShortcut} from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 
@@ -67,6 +67,12 @@ async function createWindow() {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
+  globalShortcut.register("Ctrl+O", ()=> {
+    dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then((result)=>{
+      console.log("result", result)
+    })
+  })
+
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith('https:')) shell.openExternal(url)
@@ -115,3 +121,10 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
+
+//const { ipcMain, dialog } = require("electron");
+ipcMain.handle("showDialog", (e, message) => {
+  dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then((result)=>{
+    console.log("result", result)
+  })
+});
