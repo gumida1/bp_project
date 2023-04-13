@@ -99,7 +99,7 @@ h6 {
 .panel1 {
   overflow: auto;
   min-height: 395px;
-  //height: 50%;
+  //height: 100%;
   //max-width: 18%;
   //min-width: 203px;
   width: 100%;

@@ -38,7 +38,7 @@ export default {
   //float: left;
   min-height: 790px;
   width: 19%;
-  //height: 87%;
+  height: 87%;
   border: 3px solid #081f37;
 }
 </style>

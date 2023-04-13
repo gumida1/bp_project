@@ -60,6 +60,7 @@ console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}
   width: 19%;
   display: inline-block;
   float: left;
+  height: 87%;
 }
 
 .mid_center {

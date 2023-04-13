@@ -43,7 +43,7 @@ export default {
 .panel {
   overflow: auto;
   min-height: 395px;
-  height: 50%;
+  //height: 100%;
   width: 100%;
   //min-width: 203px;
   background: #1e549f;
