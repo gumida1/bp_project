@@ -17,7 +17,7 @@
      zpracoval: {{$store.state.inf.j_zpracovatel}}
    </div>
 
-   <!--<img class="logo_class" src="../assets/logo.png">-->
+   <img class="logo_class" src="../assets/logo2.png">
 
  </div>
 </template>
@@ -82,7 +82,8 @@ export default {
 }
 
 .logo_class {
-  transform: scale(0.3);
+  transform: scale(0.54);
+  transform-origin: top left;
   top: 2mm;
   left: 2mm;
   position: absolute;
