@@ -6,7 +6,8 @@ export default createStore({
     state: {
         inf : new case_info('', '', '', '', ''),
         evi_filled: false,
-        vyj_filled: false
+        vyj_filled: false,
+        store_act_index : 0
     },
     mutations: {
         check_filled_input_evi(state) {
@@ -34,6 +35,9 @@ export default createStore({
         print_state(state) {
             console.log(state.evi_filled)
             console.log(state.vyj_filled)
+        },
+        set_active(state, {index}) {
+            state.store_act_index = index
         }
     }
 })

@@ -1,6 +1,6 @@
 <template>
   <div class="pad">
-    <div class="card" @click="change_style()" :style="{
+    <div class="card" @click="change_style(); $store.commit('set_active', {index});" :style="{
         backgroundColor: is_active ? 'red' : '#5fc9f3'
       }" v-if="!new_p">
       <p>{{index}}</p>
@@ -30,6 +30,7 @@ export default {
       }*/
       //console.log(this.list);
       this.$emit('clicked', this.index)
+
     }
   }
 }

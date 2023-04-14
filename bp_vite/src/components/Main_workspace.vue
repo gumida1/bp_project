@@ -1,7 +1,7 @@
 <template>
  <div class="white_page">
    <div class="strana">
-     strana -promenna here-
+     strana {{$store.state.store_act_index}}
    </div>
 
    <div class="foto_dokumentace">
