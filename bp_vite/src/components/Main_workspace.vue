@@ -7,14 +7,14 @@
    <div class="foto_dokumentace">
      Fotografická dokumentace k: <br>
      <h5>
-       č. j. {číslo jednací}} <br>
-       e. č. {evidenční číslo}}
+       č. j. {{$store.state.inf.c_jednaci}} <br>
+       e. č. {{$store.state.inf.c_evidencni}}
      </h5>
    </div>
 
    <div class="vyhotovil_zpracoval">
-     vyhotovil: {inf.vyhotovil}} <br>
-     zpracoval: {inf.zpracoval}}
+     vyhotovil: {{$store.state.inf.j_vyhotovitel}} <br>
+     zpracoval: {{$store.state.inf.j_zpracovatel}}
    </div>
 
    <!--<img class="logo_class" src="../assets/logo.png">-->

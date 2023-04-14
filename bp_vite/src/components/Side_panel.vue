@@ -17,11 +17,6 @@ export default {
   methods: {
     my_method() {
       ipcRenderer.invoke("showDialog", "message");
-      //if (window && window.require) {
-        //const { dialog } = window.require('electron')
-        //console.log(js.Lib.require('electron').remote.dialog.showOpenDialog(electron.renderer.Remote.getCurrentWindow(),{ properties: ['openFile', 'multiSelections'] }))
-      //}
-      //dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
     }
   }
 }
