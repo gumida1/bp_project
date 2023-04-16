@@ -1,15 +1,20 @@
 <template>
  <div class="white_page">
    <div class="strana">
-     strana {{$store.state.store_act_index}}
+     strana {{$store.state.store_act_index}}/{{$store.state.page_cnt}}
    </div>
 
    <div class="foto_dokumentace">
      Fotografická dokumentace k: <br>
      <h5>
-       č. j. {{$store.state.inf.c_jednaci}} <br>
-       e. č. {{$store.state.inf.c_evidencni}}
+       č. j.<br>
+       e. č.
      </h5>
+     <h3>
+       {{$store.state.inf.c_jednaci}} <br>
+       {{$store.state.inf.c_evidencni}}
+     </h3>
+
    </div>
 
    <div class="vyhotovil_zpracoval">
@@ -19,6 +24,8 @@
 
    <img class="logo_class" src="../assets/logo2.png">
 
+   <div id="cross"></div>
+   <div id="cross_2"></div>
  </div>
 </template>
 
@@ -81,6 +88,16 @@ export default {
   color: #000;
 }
 
+.foto_dokumentace h3 {
+  font-family: Arial;
+  font-size: 18pt;
+  text-align: left;
+  color: #000;
+  margin: 0 0 0 18mm;
+  top: 5.4mm;
+  position: absolute;
+}
+
 .logo_class {
   transform: scale(0.54);
   transform-origin: top left;
@@ -88,5 +105,59 @@ export default {
   left: 2mm;
   position: absolute;
 }
+
+#cross {
+  background: white;
+  height: 30px;
+  position: relative;
+  width: 2px;
+  top: 104.5mm;
+  left: 10mm;
+  border-style:dashed;
+  border-color: #c0c0c0;
+  border-width: 0.3mm;
+}
+#cross:after {
+  background: white;
+  content: "";
+  height: 2px;
+  left: -15px;
+  position: absolute;
+  top: 13px;
+  width: 30px;
+  border-style:dashed;
+  border-color: #c0c0c0;
+  border-width: 0.3mm;
+}
+
+#cross_2 {
+  background: white;
+  height: 30px;
+  position: relative;
+  width: 2px;
+  top: 176.5mm;
+  left: 10mm;
+  border-style:dashed;
+  border-color: #c0c0c0;
+  border-width: 0.3mm;
+  //margin: 76mm 0 0 0;
+}
+#cross_2:after {
+  background: white;
+  content: "";
+  height: 2px;
+  left: -15px;
+  position: absolute;
+  top: 13px;
+  width: 30px;
+  border-style:dashed;
+  border-color: #c0c0c0;
+  border-width: 0.3mm;
+}
+
+.two_crosses {
+  margin: 0 auto;
+}
+
 
 </style>

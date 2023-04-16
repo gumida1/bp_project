@@ -3,7 +3,7 @@
     <div class="list_pages">
       <New_page v-for="index in page_counter" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
     </div>
-    <New_page :p_c="page_counter" :new_p="true" @click="new_page()"/>
+    <New_page :p_c="page_counter" :new_p="true" @click="new_page(); $store.commit('add_new_page');"/>
   </div>
 </template>
 

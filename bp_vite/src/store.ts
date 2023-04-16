@@ -7,7 +7,8 @@ export default createStore({
         inf : new case_info('', '', '', '', ''),
         evi_filled: false,
         vyj_filled: false,
-        store_act_index : 0
+        store_act_index : 0,
+        page_cnt : 0
     },
     mutations: {
         check_filled_input_evi(state) {
@@ -38,6 +39,9 @@ export default createStore({
         },
         set_active(state, {index}) {
             state.store_act_index = index
+        },
+        add_new_page(state) {
+            state.page_cnt++
         }
     }
 })
