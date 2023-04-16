@@ -64,7 +64,7 @@ console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}
 }
 
 .mid_center {
-  transform: scale(0.75);
+  transform: scale(0.74);
   transform-origin: top;
   width: 203mm;
   height: 297mm;

@@ -42,6 +42,12 @@ export default createStore({
         },
         add_new_page(state) {
             state.page_cnt++
+        },
+        next_page_store(state) {
+            state.store_act_index++
+        },
+        previous_page_store(state) {
+            state.store_act_index--
         }
     }
 })

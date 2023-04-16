@@ -26,6 +26,7 @@
 
    <div id="cross"></div>
    <div id="cross_2"></div>
+
  </div>
 </template>
 

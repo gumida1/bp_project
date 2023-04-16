@@ -8,7 +8,7 @@
 
     <div class="card" v-if="new_p" style="background-color: #5fc9f3">
       <div v-if="new_p">
-        <i class="bi bi-plus-circle" style="font-size: 60px; color: #081f37"></i>
+        <i class="bi bi-plus-circle" style="font-size: 46px; color: #081f37"></i>
       </div>
     </div>
   </div>
@@ -25,10 +25,6 @@ export default {
   emits: ['clicked'],
   methods: {
     change_style() {
-      /*for (let i of this.list) {
-        i.active = i.c_stranky === this.index;
-      }*/
-      //console.log(this.list);
       this.$emit('clicked', this.index)
 
     }
@@ -39,7 +35,7 @@ export default {
 <style>
 .card {
   //height: auto;
-  position: fixed;
+  //position: relative;
   margin-right: 2%;
   padding: 7px;
   min-width: 120px !important;
