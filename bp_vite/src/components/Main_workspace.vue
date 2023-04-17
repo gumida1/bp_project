@@ -30,6 +30,8 @@
    <div id="cross"></div>
    <div id="cross_2"></div>
 
+  <Template_1_1/>
+
  </div>
 </template>
 
@@ -38,8 +40,10 @@
 
 <script>
 import logo from '../assets/logo.png'
+import Template_1_1 from './Template_1_1.vue'
 export default {
-  props: ['inf']
+  props: ['inf'],
+  components: { Template_1_1 }
 }
 
 </script>
@@ -57,6 +61,7 @@ export default {
 .foto_dokumentace {
   font-family: Arial;
   font-size: 10pt;
+  line-height: 1.1;
   //margin: 6mm 0 0 32mm;
   top: 6mm;
   left: 32mm;
@@ -83,6 +88,8 @@ export default {
   bottom: 2mm;
   left: 32mm;
   position: absolute;
+  line-height: 1;
+
 }
 
 .foto_dokumentace h5 {
@@ -90,15 +97,17 @@ export default {
   font-size: 18pt;
   text-align: left;
   color: #000;
+  line-height: 1.05;
 }
 
 .foto_dokumentace h3 {
   font-family: Arial;
   font-size: 18pt;
+  line-height: 1.1;
   text-align: left;
   color: #000;
   margin: 0 0 0 18mm;
-  top: 5.4mm;
+  top: 3.4mm;
   position: absolute;
 }
 
@@ -158,10 +167,5 @@ export default {
   border-color: #c0c0c0;
   border-width: 0.3mm;
 }
-
-.two_crosses {
-  margin: 0 auto;
-}
-
 
 </style>
