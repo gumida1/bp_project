@@ -1,8 +1,14 @@
 <template>
   <div class="side_panel">
-    <h6>Náhledy fotografií</h6>
+    <h6 @click="debug_images">Náhledy fotografií</h6>
     <br>
-    <button @click="my_method">Ctrl + O</button>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" v-for="path in $store.state.inf.images">
+        <h5>{{path}}</h5>
+      </li>
+    </ul>
+    <button @click="open_dialog">Ctrl + O</button>
 
   </div>
 
@@ -15,9 +21,23 @@ import {ipcRenderer} from "electron";
 
 export default {
   methods: {
-    my_method() {
-      ipcRenderer.invoke("showDialog", "message");
+    open_dialog() {
+      ipcRenderer.invoke("showDialog", "message")
+      ipcRenderer.once('dialogResult', (event, result) => {
+        console.log('Received result:', result.filePaths);
+        for (let path of result.filePaths) {
+
+          this.$store.commit('save_image_paths', {path: path})
+        }
+      });
+
+    //console.log(this.$store.state.inf)
+    },
+    debug_images() {
+      console.log(this.$store.state.inf.images)
+
     }
+
   }
 }
 
@@ -26,14 +46,25 @@ export default {
 <style>
 .side_panel {
   background-color: #1e549f;
-  overflow: hidden;
+  overflow: auto;
   position: absolute;
   top: 0;
   right: 0;
   //float: left;
   min-height: 790px;
-  width: 19%;
+  width: 22%;
   height: 87%;
   border: 3px solid #081f37;
+}
+
+.side_panel button {
+  margin-top: 10px;
+}
+
+.side_panel h5 {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 8pt;
+  margin: 0 auto;
 }
 </style>

@@ -14,7 +14,7 @@ export default defineComponent( {
   }
 })
 
-console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}!`)
+//console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}!`)
 </script>
 
 
@@ -57,7 +57,7 @@ console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}
 }
 
 .left_side {
-  width: 19%;
+  width: 22%;
   display: inline-block;
   float: left;
   height: 87%;

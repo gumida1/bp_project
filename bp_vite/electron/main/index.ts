@@ -2,6 +2,7 @@ import { app, BrowserWindow, shell, ipcMain, dialog, globalShortcut} from 'elect
 import { release } from 'node:os'
 import { join } from 'node:path'
 
+
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -126,5 +127,7 @@ ipcMain.handle('open-win', (_, arg) => {
 ipcMain.handle("showDialog", (e, message) => {
   dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then((result)=>{
     console.log("result", result)
+    e.sender.send('dialogResult', result); // send the result back to the renderer process
+    //$store.state.inf.images.push(result)
   })
 });

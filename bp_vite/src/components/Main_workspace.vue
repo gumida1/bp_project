@@ -2,6 +2,9 @@
  <div class="white_page">
    <div class="strana">
      strana {{$store.state.store_act_index}}/{{$store.state.page_cnt}}
+     <div v-for="c_S in $store.state.inf.pages">
+       <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
+     </div>
    </div>
 
    <div class="foto_dokumentace">

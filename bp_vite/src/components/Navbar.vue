@@ -36,9 +36,6 @@ export default {
   methods: {
     new_page() {
       this.page_counter++
-      let page = new page_info(this.page_counter, false)
-      this.page_arr.push(page)
-      console.log(this.active_index)
     },
     is_active(index) {
       return index === this.active_index

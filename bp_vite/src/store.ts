@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import case_info from "./model/case_class";
 import {state} from "vue-tsc/out/shared";
+import page_info from "./model/page_class";
 
 export default createStore({
     state: {
@@ -42,12 +43,18 @@ export default createStore({
         },
         add_new_page(state) {
             state.page_cnt++
+            let tmp = new page_info(state.page_cnt)
+            state.inf.pages.push(tmp)
+            console.log(state.inf.pages[0].c_stranky)
         },
         next_page_store(state) {
             state.store_act_index++
         },
         previous_page_store(state) {
             state.store_act_index--
+        },
+        save_image_paths(state, payload ) {
+            state.inf.images.push(payload.path)
         }
     }
 })
