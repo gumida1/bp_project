@@ -48,10 +48,14 @@ export default createStore({
             //console.log(state.inf.pages[0].c_stranky)
         },
         next_page_store(state) {
-            state.store_act_index++
+            if (state.store_act_index !== state.page_cnt) {
+                state.store_act_index++
+            }
         },
         previous_page_store(state) {
-            state.store_act_index--
+            if (state.store_act_index !== 1) {
+                state.store_act_index--
+            }
         },
         save_image_paths(state, payload ) {
             state.inf.images.push(payload.path)

@@ -39,10 +39,14 @@ export default {
       //console.log(this.active_index)
     },
     next_page() {
-      this.active_index++
+      if (this.active_index !== this.$store.state.page_cnt) {
+        this.active_index++
+      }
     },
     previous_page() {
-      this.active_index--
+      if (this.active_index !== 1) {
+        this.active_index--
+      }
     }
   }
 }
