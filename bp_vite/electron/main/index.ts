@@ -71,11 +71,11 @@ async function createWindow() {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
-  globalShortcut.register("Ctrl+O", ()=> {
+  /*globalShortcut.register("Ctrl+O", ()=> {
     dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then((result)=>{
       console.log("result", result)
     })
-  })
+  })*/
 
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {

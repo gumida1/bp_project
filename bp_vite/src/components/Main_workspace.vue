@@ -85,10 +85,10 @@ export default {
   font-size: 6pt;
   text-align: left;
   color: #000;
-  bottom: 2mm;
+  bottom: 1.9mm;
   left: 32mm;
   position: absolute;
-  line-height: 1;
+  line-height: 0.9;
 
 }
 

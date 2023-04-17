@@ -45,7 +45,7 @@ export default createStore({
             state.page_cnt++
             let tmp = new page_info(state.page_cnt)
             state.inf.pages.push(tmp)
-            console.log(state.inf.pages[0].c_stranky)
+            //console.log(state.inf.pages[0].c_stranky)
         },
         next_page_store(state) {
             state.store_act_index++
@@ -55,6 +55,28 @@ export default createStore({
         },
         save_image_paths(state, payload ) {
             state.inf.images.push(payload.path)
+        },
+        delete_page(state, number) {
+            let flag = 0
+            console.log('MAZEME')
+            for (let page of state.inf.pages) {
+                if (page.c_stranky === number.number) {
+                    const index = state.inf.pages.indexOf(page);
+                    if (index !== -1) {
+                        state.inf.pages.splice(index, 1);
+                        state.page_cnt--
+                        flag = 1
+                    }
+                }
+            }
+            if (flag === 1) {
+                for (let page2 of state.inf.pages) {
+                    if (page2.c_stranky > number.number) {
+                        page2.c_stranky--
+                    }
+                }
+                flag = 0
+            }
         }
     }
 })

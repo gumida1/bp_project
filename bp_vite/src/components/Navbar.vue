@@ -1,11 +1,11 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" @click="debug_pages">
     <div class="nav_elements">
 
       <a class="btn btn-sm btn-outline-success" @click="previous_page(); $store.commit('previous_page_store');">
         <i class="bi bi-arrow-left-square-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
-      <a class="btn btn-sm btn-outline-success">
+      <a class="btn btn-sm btn-outline-success" @click="$store.commit('delete_page', {number: active_index})">
         <i class="bi bi-trash-fill" style="font-size: 15px; color: red"></i>
       </a>
       <a class="btn btn-sm btn-outline-success" @click="next_page(); $store.commit('next_page_store');">
@@ -14,10 +14,9 @@
 
     </div>
     <div class="list_pages">
-      <New_page v-for="index in page_counter" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
+      <New_page v-for="index in $store.state.page_cnt" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
     </div>
-    <New_page :p_c="page_counter" :new_p="true" @click="new_page(); $store.commit('add_new_page');"/>
-
+    <New_page :p_c="$store.state.page_cnt" :new_p="true" @click="$store.commit('add_new_page')"/>
   </div>
 </template>
 
@@ -28,21 +27,16 @@ export default {
   components: { New_page },
   data() {
     return {
-      page_counter : 0,
-      page_arr : [],
       active_index: 0
     }
   },
   methods: {
-    new_page() {
-      this.page_counter++
-    },
     is_active(index) {
       return index === this.active_index
     },
     foo(index) {
       this.active_index = index
-      console.log(this.active_index)
+      //console.log(this.active_index)
     },
     next_page() {
       this.active_index++
