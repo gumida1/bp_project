@@ -2,6 +2,9 @@ import { app, BrowserWindow, shell, ipcMain, dialog, globalShortcut} from 'elect
 import { release } from 'node:os'
 import { join } from 'node:path'
 
+//const fs = require('fs')
+const path = require('path')
+const fs = require('fs-extra');
 
 // The built directory structure
 //
@@ -123,11 +126,59 @@ ipcMain.handle('open-win', (_, arg) => {
   }
 })
 
+
+
+
 //const { ipcMain, dialog } = require("electron");
-ipcMain.handle("showDialog", (e, message) => {
-  dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then((result)=>{
+ipcMain.handle("showDialog", async (e, message) => {
+  try {
+    const result = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] });
     console.log("result", result)
-    e.sender.send('dialogResult', result); // send the result back to the renderer process
-    //$store.state.inf.images.push(result)
-  })
+    let copiedFilePaths = []
+
+    if (!result.canceled && result.filePaths.length > 0) {
+      // Get the path to the user's app data folder
+      const userDataPath = app.getPath('userData')
+      const imagesFolderPath = path.join(userDataPath, 'images')
+
+      // Check if the images folder exists, and create it if it doesn't
+      if (!fs.existsSync(imagesFolderPath)) {
+        fs.mkdirSync(imagesFolderPath)
+      }
+
+      const promises = result.filePaths.map(sourcePath => {
+        const filename = path.basename(sourcePath);
+        const destinationPath = path.join(userDataPath, 'images', filename);
+
+        return new Promise((resolve, reject) => {
+          fs.copyFile(sourcePath, destinationPath, (err) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+            } else {
+              console.log(`File ${filename} copied successfully!`);
+              copiedFilePaths.push(destinationPath);
+              console.log(copiedFilePaths);
+              //$store.commit('save_image_path', {path: destinationPath})
+              resolve(result);
+            }
+          });
+        });
+      });
+
+      await Promise.all(promises);
+
+      // Return the file paths to the renderer process
+      const bpviteFilePaths = result.filePaths.map(filePath => `bpvite://${path.basename(filePath)}`)
+      console.log('tady:', copiedFilePaths)
+      e.sender.send('dialogResult', copiedFilePaths); // send the result back to the renderer process
+      return bpviteFilePaths
+    } else {
+      // Return null if the user cancelled the dialog
+      return null
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 });

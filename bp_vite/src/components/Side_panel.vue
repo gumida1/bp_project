@@ -2,13 +2,14 @@
   <div class="side_panel">
     <h6 @click="debug_images">Náhledy fotografií</h6>
     <br>
+    <button @click="open_dialog">Ctrl + O</button>
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" v-for="path in $store.state.inf.images">
+      <li class="list-group-item" v-for="path in $store.state.inf.images" :key="path">
+        <img v-bind:src="path" class="img-thumbnail">
         <h5>{{path}}</h5>
       </li>
     </ul>
-    <button @click="open_dialog">Ctrl + O</button>
 
   </div>
 
@@ -24,9 +25,9 @@ export default {
     open_dialog() {
       ipcRenderer.invoke("showDialog", "message")
       ipcRenderer.once('dialogResult', (event, result) => {
-        console.log('Received result:', result.filePaths);
-        for (let path of result.filePaths) {
-
+        console.log('Received result:', result);
+        for (let path of result) {
+          console.log(path)
           this.$store.commit('save_image_paths', {path: path})
         }
       });
@@ -35,6 +36,7 @@ export default {
     },
     debug_images() {
       console.log(this.$store.state.inf.images)
+      console.log(process.versions.electron)
 
     }
 
@@ -59,6 +61,7 @@ export default {
 
 .side_panel button {
   margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .side_panel h5 {
@@ -66,5 +69,10 @@ export default {
   font-weight: bold;
   font-size: 8pt;
   margin: 0 auto;
+}
+
+li {
+  word-wrap: break-word;
+  margin-top: 1px;
 }
 </style>

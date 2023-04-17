@@ -28,7 +28,7 @@
     "@types/bootstrap": "^5.2.6",
     "@types/electron": "^1.6.10",
     "@vitejs/plugin-vue": "^4.0.0",
-    "electron": "^23.2.2",
+    "electron": "^24.1.2",
     "electron-builder": "^23.6.0",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
