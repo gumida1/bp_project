@@ -36,7 +36,6 @@ export default {
     },
     foo(index) {
       this.active_index = index
-      //console.log(this.active_index)
     },
     next_page() {
       if (this.active_index !== this.$store.state.page_cnt) {
