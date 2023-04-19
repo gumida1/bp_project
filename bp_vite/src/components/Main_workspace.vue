@@ -68,6 +68,20 @@
          <Template_1_8 style="top: 225mm;"/>
          <Template_1_8 style="top: 225mm; left: 117mm;"/>
        </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_P_1/1'">
+         <Template_P_1_1/>
+       </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_P_1/2_a'">
+         <Template_P_1_2_a/>
+         <Template_P_1_2_a style="top: 158mm;"/>
+       </div>
+
+
+
+
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_T_1/1'">
+         <Template_T_1_1/>
+       </div>
 
 
      </div>
@@ -86,12 +100,16 @@ import Template_1_3 from './Template_1_3.vue'
 import Template_1_4 from './Template_1_4.vue'
 import Template_1_6 from './Template_1_6.vue'
 import Template_1_8 from './Template_1_8.vue'
+import Template_P_1_1 from './Template_P_1_1.vue'
+import Template_P_1_2_a from './Template_P_1_2_a.vue'
 
 
+import Template_T_1_1 from './Template_T_1_1.vue'
 
 export default {
   props: ['inf'],
-  components: { Template_1_1, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8 }
+  components: { Template_1_1, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8, Template_P_1_1,
+                Template_P_1_2_a, Template_T_1_1 }
 }
 
 </script>
