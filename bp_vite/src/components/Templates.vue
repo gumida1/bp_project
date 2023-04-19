@@ -3,7 +3,7 @@
     <div>
       <h6>Výběr šablony</h6>
     </div>
-      <img @click="print_log(img)" class="rounded" v-for="img in images" v-bind:src="img"/>
+      <img @dblclick="choose_template(img)" class="rounded" v-for="img in images" v-bind:src="img"/>
   </div>
 
 </template>
@@ -25,8 +25,69 @@ import Img_T_1 from '../assets/sablona_t_1-1.png'
 
 export default {
   methods: {
-    print_log(img) {
-     console.log(img)
+    choose_template(img) {
+      //jaka sablona je vybrana
+      if (img === Img1) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/1')
+        }
+      } else if (img === Img2) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/2')
+        }
+      }  else if (img === Img3) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/3')
+        }
+      }  else if (img === Img4) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/4')
+        }
+      }  else if (img === Img6) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/6')
+        }
+      }  else if (img === Img8) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/8')
+        }
+      }  else if (img === Img_P_1) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/1')
+        }
+      }  else if (img === Img_P_2_a) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/2_a')
+        }
+      }  else if (img === Img_P_2_b) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/2_b')
+        }
+      }  else if (img === Img_P_3) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/3')
+        }
+      }  else if (img === Img_P_4) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/4')
+        }
+      }  else if (img === Img_T_1) {
+        if (this.check_pages_arr()) {
+          this.check_pages_arr().teplates_on_single_page.push('auto_templ_T_1/1')
+        }
+      }
+    },
+    check_pages_arr() {
+      for (let page of this.$store.state.inf.pages) {
+        if (page.c_stranky === this.$store.state.store_act_index) {
+          if (page.teplates_on_single_page.length === 0) {
+            return page
+          } else {
+            console.log('Na teto strance je uz vybrana sablona, odeberte sablonu a akci opakujte')
+            return false
+          }
+        }
+      }
     }
   },
   data() {

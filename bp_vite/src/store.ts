@@ -53,7 +53,7 @@ export default createStore({
             }
         },
         previous_page_store(state) {
-            if (state.store_act_index !== 1) {
+            if (state.store_act_index !== 1 ) {
                 state.store_act_index--
             }
         },

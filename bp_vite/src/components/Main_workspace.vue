@@ -30,7 +30,48 @@
    <div id="cross"></div>
    <div id="cross_2"></div>
 
-  <Template_1_1/>
+   <div v-for="c_S in $store.state.inf.pages">
+     <div v-if="c_S.c_stranky === $store.state.store_act_index">
+       <div v-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/1'">
+         <Template_1_1/>
+       </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/2'">
+         <Template_1_2/>
+         <Template_1_2 style="top: 158mm;"/>
+       </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/3'">
+         <Template_1_3/>
+         <Template_1_3 style="top: 113.33mm;"/>
+         <Template_1_3 style="top: 202.66mm;"/>
+       </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/4'">
+         <Template_1_4/>
+         <Template_1_4 style="left: 117mm;"/>
+         <Template_1_4 style="top: 158mm;"/>
+         <Template_1_4 style="top: 158mm; left: 117mm;"/>
+       </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/6'">
+         <Template_1_6/>
+         <Template_1_6 style="left: 117mm;"/>
+         <Template_1_6 style="top: 113.33mm;"/>
+         <Template_1_6 style="top: 113.33mm; left: 117mm;"/>
+         <Template_1_6 style="top: 202.66mm;"/>
+         <Template_1_6 style="top: 202.66mm; left: 117mm;"/>
+       </div>
+       <div v-else-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/8'">
+         <Template_1_8/>
+         <Template_1_8 style="left: 117mm;"/>
+         <Template_1_8 style="top: 91mm;"/>
+         <Template_1_8 style="top: 91mm; left: 117mm;"/>
+         <Template_1_8 style="top: 158mm;"/>
+         <Template_1_8 style="top: 158mm; left: 117mm;"/>
+         <Template_1_8 style="top: 225mm;"/>
+         <Template_1_8 style="top: 225mm; left: 117mm;"/>
+       </div>
+
+
+     </div>
+   </div>
 
  </div>
 </template>
@@ -39,11 +80,18 @@
 
 
 <script>
-import logo from '../assets/logo.png'
 import Template_1_1 from './Template_1_1.vue'
+import Template_1_2 from './Template_1_2.vue'
+import Template_1_3 from './Template_1_3.vue'
+import Template_1_4 from './Template_1_4.vue'
+import Template_1_6 from './Template_1_6.vue'
+import Template_1_8 from './Template_1_8.vue'
+
+
+
 export default {
   props: ['inf'],
-  components: { Template_1_1 }
+  components: { Template_1_1, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8 }
 }
 
 </script>
