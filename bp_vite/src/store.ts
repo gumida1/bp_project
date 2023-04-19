@@ -45,6 +45,7 @@ export default createStore({
             state.page_cnt++
             let tmp = new page_info(state.page_cnt)
             state.inf.pages.push(tmp)
+            state.store_act_index = state.page_cnt
             //console.log(state.inf.pages[0].c_stranky)
         },
         next_page_store(state) {
@@ -68,6 +69,9 @@ export default createStore({
                     const index = state.inf.pages.indexOf(page);
                     if (index !== -1) {
                         state.inf.pages.splice(index, 1);
+                        if (number.number === state.page_cnt) {
+                            state.store_act_index--
+                        }
                         state.page_cnt--
                         flag = 1
                     }

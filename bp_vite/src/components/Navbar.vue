@@ -5,7 +5,7 @@
       <a class="btn btn-sm btn-outline-success" @click="previous_page(); $store.commit('previous_page_store');">
         <i class="bi bi-arrow-left-square-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
-      <a class="btn btn-sm btn-outline-success" @click="$store.commit('delete_page', {number: active_index})">
+      <a class="btn btn-sm btn-outline-success" @click="$store.commit('delete_page', {number: active_index}); delete_page();">
         <i class="bi bi-trash-fill" style="font-size: 15px; color: red"></i>
       </a>
       <a class="btn btn-sm btn-outline-success" @click="next_page(); $store.commit('next_page_store');">
@@ -16,7 +16,7 @@
     <div class="list_pages">
       <New_page v-for="index in $store.state.page_cnt" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
     </div>
-    <New_page :p_c="$store.state.page_cnt" :new_p="true" @click="$store.commit('add_new_page')"/>
+    <New_page :p_c="$store.state.page_cnt" :new_p="true" @click="$store.commit('add_new_page'); new_page();"/>
   </div>
 </template>
 
@@ -31,6 +31,12 @@ export default {
     }
   },
   methods: {
+    new_page() {
+      this.active_index = this.$store.state.store_act_index
+    },
+    delete_page() {
+      this.active_index = this.$store.state.store_act_index
+    },
     is_active(index) {
       return index === this.active_index
     },
