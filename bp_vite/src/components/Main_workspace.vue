@@ -30,6 +30,7 @@
    <div id="cross"></div>
    <div id="cross_2"></div>
 
+
    <div v-for="c_S in $store.state.inf.pages">
      <div v-if="c_S.c_stranky === $store.state.store_act_index">
        <div v-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/1'">
@@ -86,6 +87,42 @@
 
      </div>
    </div>
+
+   <div v-for="c_S in $store.state.inf.pages">
+     <div v-if="c_S.c_stranky === $store.state.store_act_index">
+       <div v-for="template in c_S.templates_on_page">
+         <div style="top: 150mm; position: absolute;">
+           {{template}}
+         </div>
+         <div v-if="template.template_type === '1/1'">
+           <Template_1_1/>
+         </div>
+         <div v-else-if="template.template_type === '1/2'">
+           <Template_1_2 :style="{ top: template.from_top }"/>
+         </div>
+
+       </div>
+     </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  </div>
 </template>

@@ -3,7 +3,7 @@
     <div>
       <h6>Výběr šablony</h6>
     </div>
-      <img @dblclick="choose_template(img)" class="rounded" v-for="img in images" v-bind:src="img"/>
+      <img @dblclick="handleClick($event, img)" class="rounded" v-for="img in images" v-bind:src="img"/>
   </div>
 
 </template>
@@ -22,18 +22,23 @@ import Img_P_2_b from '../assets/sablona_p_1-2_b.png'
 import Img_P_3 from '../assets/sablona_p_1-3.png'
 import Img_P_4 from '../assets/sablona_p_1-4.png'
 import Img_T_1 from '../assets/sablona_t_1-1.png'
+import template_info from "../model/template_class";
 
 export default {
   methods: {
-    choose_template(img) {
-      //jaka sablona je vybrana
+    choose_template_auto(img) {
+      let cur_page = this.check_pages_arr()
       if (img === Img1) {
         if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/1')
+          cur_page.teplates_on_single_page.push('auto_templ_1/1')
+          let new_template = new template_info(this.$store.state.template_cnt++, 'auto_1/1')
+          cur_page.templates_on_page.push(new_template)
         }
       } else if (img === Img2) {
         if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/2')
+          cur_page.teplates_on_single_page.push('auto_templ_1/2')
+          let new_template = new template_info(this.$store.state.template_cnt++, 'auto_1/2')
+          cur_page.templates_on_page.push(new_template)
         }
       }  else if (img === Img3) {
         if (this.check_pages_arr()) {
@@ -77,24 +82,127 @@ export default {
         }
       }
     },
-    check_pages_arr() {
+    check_pages_arr(manual) {
       for (let page of this.$store.state.inf.pages) {
         if (page.c_stranky === this.$store.state.store_act_index) {
           if (page.teplates_on_single_page.length === 0) {
             return page
           } else {
-            console.log('Na teto strance je uz vybrana sablona, odeberte sablonu a akci opakujte')
-            return false
+            if (manual === 1) {
+              return page
+            } else {
+              console.log('Na teto strance je uz vybrana sablona, odeberte sablonu a akci opakujte')
+              return false
+            }
           }
         }
       }
-    }
+    },
+    choose_template_manually(img) {
+      let cur_page = this.check_pages_arr(1)
+      if (img === Img1) {
+          cur_page.teplates_on_single_page.push('templ_1/1')
+          let new_template = new template_info(this.$store.state.template_cnt++, '1/1')
+          cur_page.templates_on_page.push(new_template)
+      } else if (img === Img2) {
+        if (this.check_space_left(cur_page)) {
+          if (cur_page.templates_on_page.length === 0) {
+            cur_page.teplates_on_single_page.push('templ_1/2')
+            let new_template = new template_info(this.$store.state.template_cnt++, '1/2')
+            cur_page.templates_on_page.push(new_template)
+          }
+        }
+      }  else if (img === Img3) {
+
+      }  else if (img === Img4) {
+
+      }  else if (img === Img6) {
+
+      }  else if (img === Img8) {
+
+      }  else if (img === Img_P_1) {
+
+      }  else if (img === Img_P_2_a) {
+
+      }  else if (img === Img_P_2_b) {
+
+      }  else if (img === Img_P_3) {
+
+      }  else if (img === Img_P_4) {
+
+      }  else if (img === Img_T_1) {
+
+      }
+    },
+    check_space_left(current) {
+      console.log(current.templates_on_page)
+      console.log('HEEHE')
+      for (let space of current.filled) {
+        /*if (template.template_type === '1/1') {
+          console.log('Na aktuální stránce pro tuto šablonu již není místo')
+        } else if (template.template_type === '1/2') {
+          console.log('NASTAVCUJE')
+          let new_template = new template_info(this.$store.state.template_cnt++, '1/2')
+          new_template.from_top = '158mm'
+          current.templates_on_page.push(new_template)
+          break
+        }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      }
+      return current
+    },
+    handleClick(event, img) {
+      if (this.ctrlPressed) {
+        this.choose_template_manually(img);
+      } else {
+        this.choose_template_auto(img);
+      }
+    },
+    handleKeyDown(event) {
+      if (event.ctrlKey) {
+        this.ctrlPressed = true;
+      }
+    },
+    handleKeyUp() {
+      this.ctrlPressed = false;
+    },
   },
   data() {
     return {
-      images: [Img1, Img2, Img3, Img4, Img6, Img8, Img_P_1, Img_P_2_a, Img_P_2_b, Img_P_3, Img_P_4, Img_T_1]
+      images: [Img1, Img2, Img3, Img4, Img6, Img8, Img_P_1, Img_P_2_a, Img_P_2_b, Img_P_3, Img_P_4, Img_T_1],
+      ctrlPressed: false
     }
-  }
+  },
+  mounted() {
+    document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keyup', this.handleKeyUp);
+  },
+  destroyed() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('keyup', this.handleKeyUp);
+  },
 }
 </script>
 

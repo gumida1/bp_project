@@ -9,7 +9,8 @@ export default createStore({
         evi_filled: false,
         vyj_filled: false,
         store_act_index : 0,
-        page_cnt : 0
+        page_cnt : 0,
+        template_cnt : 0
     },
     mutations: {
         check_filled_input_evi(state) {
