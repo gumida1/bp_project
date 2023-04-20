@@ -30,7 +30,7 @@
    <div id="cross"></div>
    <div id="cross_2"></div>
 
-
+  <!--
    <div v-for="c_S in $store.state.inf.pages">
      <div v-if="c_S.c_stranky === $store.state.store_act_index">
        <div v-if="c_S.teplates_on_single_page[0] === 'auto_templ_1/1'">
@@ -104,8 +104,12 @@
        </div>
      </div>
    </div>
+-->
 
+   <!-- ****** -- ****** -->
 
+   <!--<Template_only_img :sizes="$store.state.templ_1_1"/>-->
+    <Template_P_1_1 :sizes="$store.state.templ_p_1_2_a"/>
 
 
 
@@ -131,7 +135,7 @@
 
 
 <script>
-import Template_1_1 from './Template_1_1.vue'
+import Template_only_img from './Template_only_img.vue'
 import Template_1_2 from './Template_1_2.vue'
 import Template_1_3 from './Template_1_3.vue'
 import Template_1_4 from './Template_1_4.vue'
@@ -145,7 +149,7 @@ import Template_T_1_1 from './Template_T_1_1.vue'
 
 export default {
   props: ['inf'],
-  components: { Template_1_1, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8, Template_P_1_1,
+  components: { Template_only_img, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8, Template_P_1_1,
                 Template_P_1_2_a, Template_T_1_1 }
 }
 

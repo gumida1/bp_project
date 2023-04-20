@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 import case_info from "./model/case_class";
 import {state} from "vue-tsc/out/shared";
 import page_info from "./model/page_class";
+import template_sizes from "./model/template_sizes_class";
+import template_sizes_text from "./model/template_sizes_text_class";
 
 export default createStore({
     state: {
@@ -10,7 +12,19 @@ export default createStore({
         vyj_filled: false,
         store_act_index : 0,
         page_cnt : 0,
-        template_cnt : 0
+        template_cnt : 0,
+        templ_1_1 : new template_sizes(259,167,2, false),
+        templ_1_2 : new template_sizes(125,167,2, false),
+        templ_1_3 : new template_sizes(80.33,167,2, false),
+        templ_1_4 : new template_sizes(125,82,1, false),
+        templ_1_6 : new template_sizes(80.33,82,1, false),
+        templ_1_8 : new template_sizes(58,82,1, false),
+        templ_p_1_1 : new template_sizes_text(234,167,2, true, 25, 167, false),
+        templ_p_1_2_a : new template_sizes_text(100,167,2, true, 25, 167, false),
+        templ_p_1_2_b : new template_sizes_text(125,167,2, true, 125, 47, true),
+        templ_p_1_3 : new template_sizes_text(80.33,167,2, true, 80.33, 47, true),
+        templ_p_1_4 : new template_sizes_text(58,167,2, true, 58, 47, true),
+        templ_t_1_1 : new template_sizes_text(265,167,2, true, 265, 167, true),
     },
     mutations: {
         check_filled_input_evi(state) {
