@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.0-alpha1",
-    "bootstrap-icons": "^1.10.3",
+    "bootstrap-icons": "^1.10.4",
     "bootstrap-switch-button": "^1.1.0",
     "framework7": "^7.1.5",
     "framework7-vue": "^7.1.5",

@@ -39,6 +39,8 @@ export default defineComponent( {
 </template>
 
 <style>
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons';
+
 .topcorner{
   position: absolute;
   top:0;
