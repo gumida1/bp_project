@@ -1,12 +1,10 @@
 <template>
 
   <div :style="cssProps" class="template_border_P" @click="set_active">
+    <div :style="cssProps" class="text_top_border_P">
+    </div>
     <div :style="cssProps" class="img_border_P">
       <img v-bind:src="spacing.image">
-
-      <div :style="cssProps" class="text_top_border_P">
-
-      </div>
     </div>
     <textarea placeholder="Zde je prostor pro popisný text" v-model="spacing.text"> </textarea>
   </div>
@@ -23,6 +21,7 @@ export default {
         '--height': this.sizes.side_text ? this.sizes.height + 'mm' : this.sizes.height + 'mm',
         '--width': this.sizes.side_text ? this.sizes.width + 'mm' : this.sizes.width + 'mm',
         '--width_2': this.sizes.side_text ? this.sizes.text_width + 'mm' : this.sizes.width + 'mm',
+        '--width_3': this.sizes.side_text ? this.sizes.width - this.sizes.text_width + 'mm' : this.sizes.width + 'mm',
         '--height_2': this.sizes.side_text ? this.sizes.text_height : this.sizes.height + 6 + 'mm',
         '--left': this.sizes.side_text ? '1px solid' : '0px solid',
         '--bottom': this.sizes.side_text ? '0px solid' : '1px solid',
@@ -72,13 +71,13 @@ export default {
   left: -1px;
   border-bottom: 1px solid;
   height: var(--height);
-  width: var(--width);
+  width: var(--width_3);
 }
 
 .text_top_border_P {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 0;
   border-left: var(--left);
   border-bottom: var(--bottom);
   height: var(--height);
