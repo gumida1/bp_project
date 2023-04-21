@@ -6,6 +6,12 @@
     <div :style="cssProps" class="img_border_P">
       <img v-bind:src="spacing.image">
     </div>
+    <div class="caption_img_P">
+      {{name_img}}
+    </div>
+    <div class="photo_index_P">
+      fotografie č. {{spacing.id_templatu}}
+    </div>
     <textarea placeholder="Zde je prostor pro popisný text" v-model="spacing.text"> </textarea>
   </div>
 
@@ -33,7 +39,12 @@ export default {
         '--left_2' : this.spacing.from_left,
         '--border-color': this.spacing.is_active ? 'red' : 'black',
         '--border-width': this.spacing.is_active ? '4px dashed' : '1px solid',
+        '--bottom_2' : this.sizes.side_text ? 0 : '25mm'
       }
+    },
+    name_img() {
+      let arr = this.spacing.image.split('\\')
+      return arr[arr.length - 1]
     }
   },
   methods: {
@@ -102,6 +113,30 @@ export default {
   width: 100%;
   top: -1px;
   left: -1px;
+}
+
+.caption_img_P {
+  position: absolute;
+  bottom: var(--bottom_2);
+  width: 100%;
+  height: 6mm;
+  font-family: Arial;
+  font-size: 10pt;
+  color: #000;
+  text-align: left;
+  left: 1mm;
+}
+
+.photo_index_P {
+  position: absolute;
+  bottom: var(--bottom_2);
+  width: 100%;
+  height: 6mm;
+  font-family: Arial;
+  font-size: 10pt;
+  color: #000;
+  text-align: right;
+  right: 1mm;
 }
 
 
