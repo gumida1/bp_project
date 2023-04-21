@@ -3,6 +3,12 @@
     <div :style="cssProps" class="img_border">
       <img v-bind:src="spacing.image">
     </div>
+    <div class="caption_img">
+      {{name_img}}
+    </div>
+    <div class="photo_index">
+      fotografie č. {{spacing.id_templatu}}
+    </div>
   </div>
 </template>
 
@@ -20,6 +26,10 @@ export default {
         '--border-color': this.spacing.is_active ? 'red' : 'black',
         '--border-width': this.spacing.is_active ? '4px dashed' : '1px solid',
       }
+    },
+    name_img() {
+      let arr = this.spacing.image.split('\\')
+      return arr[arr.length - 1]
     }
   },
   methods: {
@@ -66,4 +76,29 @@ export default {
   top: -1px;
   left: -1px;
 }
+
+.caption_img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6mm;
+  font-family: Arial;
+  font-size: 10pt;
+  color: #000;
+  text-align: left;
+  left: 1mm;
+}
+
+.photo_index {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6mm;
+  font-family: Arial;
+  font-size: 10pt;
+  color: #000;
+  text-align: right;
+  right: 1mm;
+}
+
 </style>
