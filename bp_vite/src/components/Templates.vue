@@ -138,25 +138,7 @@ export default {
       console.log(current.templates_on_page)
       console.log('HEEHE')
       for (let space of current.filled) {
-        /*if (template.template_type === '1/1') {
-          console.log('Na aktuální stránce pro tuto šablonu již není místo')
-        } else if (template.template_type === '1/2') {
-          console.log('NASTAVCUJE')
-          let new_template = new template_info(this.$store.state.template_cnt++, '1/2')
-          new_template.from_top = '158mm'
-          current.templates_on_page.push(new_template)
-          break
-        }*/
-
-
-
-
-
-
-
-
-
-
+        
 
 
 

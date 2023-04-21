@@ -109,7 +109,7 @@
    <!-- ****** -- ****** -->
 
    <!--<Template_only_img :sizes="$store.state.templ_1_1"/>-->
-    <Template_P_1_1 :sizes="$store.state.templ_p_1_2_a"/>
+    <Template_combined :sizes="$store.state.templ_p_1_4"/>
 
 
 
@@ -141,7 +141,7 @@ import Template_1_3 from './Template_1_3.vue'
 import Template_1_4 from './Template_1_4.vue'
 import Template_1_6 from './Template_1_6.vue'
 import Template_1_8 from './Template_1_8.vue'
-import Template_P_1_1 from './Template_P_1_1.vue'
+import Template_combined from './Template_combined.vue'
 import Template_P_1_2_a from './Template_P_1_2_a.vue'
 
 
@@ -149,7 +149,7 @@ import Template_T_1_1 from './Template_T_1_1.vue'
 
 export default {
   props: ['inf'],
-  components: { Template_only_img, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8, Template_P_1_1,
+  components: { Template_only_img, Template_1_2, Template_1_3, Template_1_4, Template_1_6, Template_1_8, Template_combined,
                 Template_P_1_2_a, Template_T_1_1 }
 }
 

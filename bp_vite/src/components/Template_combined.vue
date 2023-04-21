@@ -26,11 +26,10 @@ export default {
         '--height_2': this.sizes.side_text ? this.sizes.text_height : this.sizes.height + 6 + 'mm',
         '--left': this.sizes.side_text ? '1px solid' : '0px solid',
         '--bottom': this.sizes.side_text ? '0px solid' : '1px solid',
-
+        '--textarea': this.sizes.side_text ? 6 + 'mm' : 0,
         '--height_3': this.sizes.side_text ? this.sizes.height + 6 + 'mm' : this.sizes.height + this.sizes.text_height + 6 + 'mm',
         '--t_height': this.sizes.text_height + 'mm',
         '--t_width': this.sizes.text_width + 'mm'
-
       }
     }
   }
@@ -59,9 +58,10 @@ export default {
 .text_top_border_P {
   position: absolute;
   right: 0;
+  bottom: 0;
   border-left: var(--left);
   border-bottom: var(--bottom);
-  height: var(--height_2);
+  height: var(--height);
   width: var(--width_2);
 }
 
@@ -73,8 +73,9 @@ export default {
   font-size: 12pt;
   font-family: "Arial Narrow";
   resize: none !important;
-  bottom: 0;
-  left: -1px;
+  bottom: var(--textarea);
+  right: 0;
+  //left: -1px;
   position: absolute;
   overflow:hidden;
 }
