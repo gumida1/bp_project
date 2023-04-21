@@ -1,9 +1,11 @@
 <template>
 
-  <div :style="cssProps" class="template_border_P">
+  <div :style="cssProps" class="template_border_P" @click="set_active">
     <div :style="cssProps" class="img_border_P">
+      <img v-bind:src="spacing.image">
+
       <div :style="cssProps" class="text_top_border_P">
-        <img v-bind:src="spacing.image">
+
       </div>
     </div>
     <textarea placeholder="Zde je prostor pro popisný text" v-model="spacing.text"> </textarea>
@@ -29,8 +31,25 @@ export default {
         '--t_height': this.sizes.text_height + 'mm',
         '--t_width': this.sizes.text_width + 'mm',
         '--top' : this.spacing.from_top,
-        '--left_2' : this.spacing.from_left
+        '--left_2' : this.spacing.from_left,
+        '--border-color': this.spacing.is_active ? 'red' : 'black',
+        '--border-width': this.spacing.is_active ? '4px dashed' : '1px solid',
       }
+    }
+  },
+  methods: {
+    set_active() {
+      for (let page of this.$store.state.inf.pages) {
+        for (let template of page.templates_on_page) {
+          if (template === this.spacing) {
+            this.spacing.is_active = !this.spacing.is_active;
+            this.$store.state.active_template = this.spacing.id_templatu
+          } else {
+            template.is_active = false
+          }
+        }
+      }
+      console.log(this.spacing.is_active, this.$store.state.active_template)
     }
   }
 }
@@ -41,9 +60,10 @@ export default {
   position: absolute;
   top: var(--top);
   left: var(--left_2);
-  border: 1px solid;
+  border: var(--border-width);
   height: var(--height_3);
   width: var(--width);
+  border-color: var(--border-color);
 }
 
 .img_border_P {
@@ -75,11 +95,15 @@ export default {
   resize: none !important;
   bottom: var(--textarea);
   right: 0;
-  //left: -1px;
   position: absolute;
   overflow:hidden;
 }
-
+.img_border_P img {
+  height: 100%;
+  width: 100%;
+  top: -1px;
+  left: -1px;
+}
 
 
 </style>
