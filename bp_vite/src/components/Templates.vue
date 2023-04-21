@@ -93,19 +93,43 @@ export default {
             break;
           }
           case Img_P_2_a: {
-            this.check_space_left(cur_page, this.$store.state.templ_p_1_2_a)
+            if (man_auto) {
+              for (let i = 0; i < 2; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_p_1_2_a)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_p_1_2_a)
+            }
             break;
           }
           case Img_P_2_b: {
-            this.check_space_left(cur_page, this.$store.state.templ_p_1_2_b)
+            if (man_auto) {
+              for (let i = 0; i < 2; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_p_1_2_b)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_p_1_2_b)
+            }
             break;
           }
           case Img_P_3: {
-            this.check_space_left(cur_page, this.$store.state.templ_p_1_3)
+            if (man_auto) {
+              for (let i = 0; i < 3; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_p_1_3)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_p_1_3)
+            }
             break;
           }
           case Img_P_4: {
-            this.check_space_left(cur_page, this.$store.state.templ_p_1_4)
+            if (man_auto) {
+              for (let i = 0; i < 4; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_p_1_4)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_p_1_4)
+            }
             break;
           }
           case Img_T_1: {
@@ -156,11 +180,28 @@ export default {
       if (template.columns === 2) {
         from_left = 32
         if (this.check_overflow(template, max_left_col)) return false
-        let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
-        current.templates_on_page.push(new_templ)
+        if (template.has_text) {
+          if (template.side_text) {
+            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+            current.templates_on_page.push(new_templ)
 
-        let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
-        current.filled.push(new_filled_space)
+            let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
+            current.filled.push(new_filled_space)
+          } else {
+            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+            current.templates_on_page.push(new_templ)
+
+            let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3+template.text_height)
+            current.filled.push(new_filled_space)
+          }
+
+        } else {
+          let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+          current.templates_on_page.push(new_templ)
+
+          let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
+          current.filled.push(new_filled_space)
+        }
       } else {
           if (max_right_col < max_left_col) {
             from_left = 85 + 32

@@ -29,18 +29,26 @@
    <div id="cross"></div>
    <div id="cross_2"></div>
 
-   <!--<div v-for="c_S in $store.state.inf.pages">
-     <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
-   </div>-->
+
 
    <div v-for="c_S in $store.state.inf.pages">
      <div v-if="c_S.c_stranky === $store.state.store_act_index">
        <div v-for="templ in c_S.templates_on_page">
-         <Template_only_img v-if="!(templ.template_type.has_text)" :sizes="templ.template_type" :spacing="templ"/>
-         <Template_combined v-else-if="templ.template_type.has_text" :sizes="templ.template_type"/>
+         <div v-if="!(templ.template_type.has_text)">
+           <Template_only_img :sizes="templ.template_type" :spacing="templ"/>
+         </div>
+         <div v-else-if="templ.template_type.has_text">
+           <Template_combined :sizes="templ.template_type" :spacing="templ"/>
+         </div>
        </div>
      </div>
    </div>
+
+
+
+   <!--<div v-for="c_S in $store.state.inf.pages">
+     <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
+   </div>-->
 
 
 

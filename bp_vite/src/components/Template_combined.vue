@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['sizes'],
+  props: ['sizes', 'spacing'],
   computed: {
     cssProps() {
       return {
@@ -29,7 +29,9 @@ export default {
         '--textarea': this.sizes.side_text ? 6 + 'mm' : 0,
         '--height_3': this.sizes.side_text ? this.sizes.height + 6 + 'mm' : this.sizes.height + this.sizes.text_height + 6 + 'mm',
         '--t_height': this.sizes.text_height + 'mm',
-        '--t_width': this.sizes.text_width + 'mm'
+        '--t_width': this.sizes.text_width + 'mm',
+        '--top' : this.spacing.from_top,
+        '--left_2' : this.spacing.from_left
       }
     }
   }
@@ -39,8 +41,8 @@ export default {
 <style>
 .template_border_P {
   position: absolute;
-  top: 24mm;
-  left: 32mm;
+  top: var(--top);
+  left: var(--left_2);
   border: 1px solid;
   height: var(--height_3);
   width: var(--width);
