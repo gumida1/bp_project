@@ -7,6 +7,7 @@ export default class template_info {
     text : string = '';
     from_top: string;
     from_left: string;
+    is_active : boolean = false;
 
     constructor(id : number, t_t : template_sizes, from_top : string, from_left: string) {
         this.id_templatu = id

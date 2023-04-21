@@ -13,6 +13,7 @@ export default createStore({
         store_act_index : 0,
         page_cnt : 0,
         template_cnt : 1,
+        active_template : 0,
         templ_1_1 : new template_sizes(259,167,2, false),
         templ_1_2 : new template_sizes(125,167,2, false),
         templ_1_3 : new template_sizes(80.33,167,2, false),

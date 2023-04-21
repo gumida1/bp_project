@@ -5,7 +5,7 @@
     <button @click="open_dialog">Ctrl + O</button>
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" v-for="path in $store.state.inf.images" :key="path">
+      <li class="list-group-item" v-for="path in $store.state.inf.images" :key="path" @click="add_image_in_active_templ(path)">
         <img v-bind:src="path" class="img-thumbnail">
         <h5>{{path}}</h5>
       </li>
@@ -38,6 +38,16 @@ export default {
       console.log(this.$store.state.inf.images)
       console.log(process.versions.electron)
 
+    },
+    add_image_in_active_templ(path) {
+      for (let page of this.$store.state.inf.pages) {
+        for (let template of page.templates_on_page) {
+          if (template.is_active) {
+            template.image = path
+          }
+        }
+      }
+      console.log(path)
     }
 
   }

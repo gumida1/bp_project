@@ -3,12 +3,10 @@
   <div :style="cssProps" class="template_border_P">
     <div :style="cssProps" class="img_border_P">
       <div :style="cssProps" class="text_top_border_P">
-        <img>
+        <img v-bind:src="spacing.image">
       </div>
     </div>
-    <div v-for="c_S in $store.state.inf.pages">
-      <textarea placeholder="Zde je prostor pro popisný text" v-if="c_S.c_stranky === $store.state.store_act_index" v-model="c_S.text_on_single_page"> </textarea>
-    </div>
+    <textarea placeholder="Zde je prostor pro popisný text" v-model="spacing.text"> </textarea>
   </div>
 
 
