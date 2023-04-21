@@ -2,9 +2,6 @@
  <div class="white_page">
    <div class="strana">
      strana {{$store.state.store_act_index}}/{{$store.state.page_cnt}}
-     <div v-for="c_S in $store.state.inf.pages">
-       <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
-     </div>
    </div>
 
    <div class="foto_dokumentace">
@@ -25,10 +22,16 @@
      zpracoval: {{$store.state.inf.j_zpracovatel}}
    </div>
 
+
+
    <img class="logo_class" src="../assets/logo2.png">
 
    <div id="cross"></div>
    <div id="cross_2"></div>
+
+   <div v-for="c_S in $store.state.inf.pages">
+     <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
+   </div>
 
   <!--
    <div v-for="c_S in $store.state.inf.pages">
@@ -108,9 +111,15 @@
 
    <!-- ****** -- ****** -->
 
-   <!--<Template_only_img :sizes="$store.state.templ_1_1"/>-->
-    <Template_combined :sizes="$store.state.templ_p_1_4"/>
 
+   <div v-for="c_S in $store.state.inf.pages">
+     <div v-if="c_S.c_stranky === $store.state.store_act_index">
+       <div v-for="templ in c_S.templates_on_page">
+         <Template_only_img v-if="!(templ.template_type.has_text)" :sizes="templ.template_type" :spacing="templ"/>
+         <Template_combined v-else-if="templ.template_type.has_text" :sizes="templ.template_type"/>
+       </div>
+     </div>
+   </div>
 
 
 

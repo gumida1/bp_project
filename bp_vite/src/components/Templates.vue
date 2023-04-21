@@ -23,72 +23,77 @@ import Img_P_3 from '../assets/sablona_p_1-3.png'
 import Img_P_4 from '../assets/sablona_p_1-4.png'
 import Img_T_1 from '../assets/sablona_t_1-1.png'
 import template_info from "../model/template_class";
+import space_info from "../model/space_class";
 
 export default {
   methods: {
-    choose_template_auto(img) {
-      let cur_page = this.check_pages_arr()
-      if (img === Img1) {
-        if (this.check_pages_arr()) {
-          cur_page.teplates_on_single_page.push('auto_templ_1/1')
-          let new_template = new template_info(this.$store.state.template_cnt++, 'auto_1/1')
-          cur_page.templates_on_page.push(new_template)
+    choose_template(img, man_auto) {
+      let cur_page = this.check_pages_arr(man_auto)
+      if (cur_page) {
+        console.log(cur_page)
+        switch(img) {
+          case Img1: {
+            console.log('1')
+            this.check_space_left(cur_page, this.$store.state.templ_1_1)
+            break;
+          }
+          case Img2: {
+            console.log('2')
+            this.check_space_left(cur_page, this.$store.state.templ_1_2)
+            break;
+          }
+          case Img3: {
+            this.check_space_left(cur_page, this.$store.state.templ_1_3)
+            break;
+          }
+          case Img4: {
+            this.check_space_left(cur_page, this.$store.state.templ_1_4)
+            break;
+          }
+          case Img6: {
+            this.check_space_left(cur_page, this.$store.state.templ_1_6)
+            break;
+          }
+          case Img8: {
+            this.check_space_left(cur_page, this.$store.state.templ_1_8)
+            break;
+          }
+          case Img_P_1: {
+            this.check_space_left(cur_page, this.$store.state.templ_p_1_1)
+            break;
+          }
+          case Img_P_2_a: {
+            this.check_space_left(cur_page, this.$store.state.templ_p_1_2_a)
+            break;
+          }
+          case Img_P_2_b: {
+            this.check_space_left(cur_page, this.$store.state.templ_p_1_2_b)
+            break;
+          }
+          case Img_P_3: {
+            this.check_space_left(cur_page, this.$store.state.templ_p_1_3)
+            break;
+          }
+          case Img_P_4: {
+            this.check_space_left(cur_page, this.$store.state.templ_p_1_4)
+            break;
+          }
+          case Img_T_1: {
+            break;
+          }
         }
-      } else if (img === Img2) {
-        if (this.check_pages_arr()) {
-          cur_page.teplates_on_single_page.push('auto_templ_1/2')
-          let new_template = new template_info(this.$store.state.template_cnt++, 'auto_1/2')
-          cur_page.templates_on_page.push(new_template)
-        }
-      }  else if (img === Img3) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/3')
-        }
-      }  else if (img === Img4) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/4')
-        }
-      }  else if (img === Img6) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/6')
-        }
-      }  else if (img === Img8) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_1/8')
-        }
-      }  else if (img === Img_P_1) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/1')
-        }
-      }  else if (img === Img_P_2_a) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/2_a')
-        }
-      }  else if (img === Img_P_2_b) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/2_b')
-        }
-      }  else if (img === Img_P_3) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/3')
-        }
-      }  else if (img === Img_P_4) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_P_1/4')
-        }
-      }  else if (img === Img_T_1) {
-        if (this.check_pages_arr()) {
-          this.check_pages_arr().teplates_on_single_page.push('auto_templ_T_1/1')
-        }
+      } else {
+        console.log('Není zvolená žádná aktivní stránka')
       }
+
     },
     check_pages_arr(manual) {
       for (let page of this.$store.state.inf.pages) {
         if (page.c_stranky === this.$store.state.store_act_index) {
-          if (page.teplates_on_single_page.length === 0) {
+          if (page.templates_on_page.length === 0) {
             return page
           } else {
-            if (manual === 1) {
+            if (manual === 0) {
               return page
             } else {
               console.log('Na teto strance je uz vybrana sablona, odeberte sablonu a akci opakujte')
@@ -98,68 +103,37 @@ export default {
         }
       }
     },
-    choose_template_manually(img) {
-      let cur_page = this.check_pages_arr(1)
-      if (img === Img1) {
-          cur_page.teplates_on_single_page.push('templ_1/1')
-          let new_template = new template_info(this.$store.state.template_cnt++, '1/1')
-          cur_page.templates_on_page.push(new_template)
-      } else if (img === Img2) {
-        if (this.check_space_left(cur_page)) {
-          if (cur_page.templates_on_page.length === 0) {
-            cur_page.teplates_on_single_page.push('templ_1/2')
-            let new_template = new template_info(this.$store.state.template_cnt++, '1/2')
-            cur_page.templates_on_page.push(new_template)
-          }
-        }
-      }  else if (img === Img3) {
-
-      }  else if (img === Img4) {
-
-      }  else if (img === Img6) {
-
-      }  else if (img === Img8) {
-
-      }  else if (img === Img_P_1) {
-
-      }  else if (img === Img_P_2_a) {
-
-      }  else if (img === Img_P_2_b) {
-
-      }  else if (img === Img_P_3) {
-
-      }  else if (img === Img_P_4) {
-
-      }  else if (img === Img_T_1) {
-
-      }
-    },
-    check_space_left(current) {
+    check_space_left(current, template) {
       console.log(current.templates_on_page)
       console.log('HEEHE')
+      let max_left_col = 21
+      let max_right_col = 21
       for (let space of current.filled) {
-        
+        if (space.left) {
+          if (max_left_col < space.end_pos) {
+            max_left_col = space.end_pos
+          }
+        }
+        if (space.right) {
+          if (max_right_col < space.end_pos)  {
+            max_right_col = space.end_pos
+          }
+        }
+      }
 
-
-
-
-
-
-
-
-
-
-
-
-
+      let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm')
+      current.templates_on_page.push(new_templ)
+      if (template.columns === 2) {
+        let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
+        current.filled.push(new_filled_space)
       }
       return current
     },
     handleClick(event, img) {
       if (this.ctrlPressed) {
-        this.choose_template_manually(img);
+        this.choose_template(img, 0);
       } else {
-        this.choose_template_auto(img);
+        this.choose_template(img, 1);
       }
     },
     handleKeyDown(event) {

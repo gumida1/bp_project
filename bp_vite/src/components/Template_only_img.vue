@@ -8,13 +8,15 @@
 
 <script>
 export default {
-  props: ['sizes'],
+  props: ['sizes', 'spacing'],
   computed: {
     cssProps() {
       return {
         '--height': this.sizes.height + 'mm',
         '--width': this.sizes.width + 'mm',
         '--height_2' : this.sizes.height + 6 +'mm',
+        '--top' : this.spacing.from_top,
+        '--left' : this.spacing.from_left
       }
     }
   }
@@ -24,8 +26,8 @@ export default {
 <style>
 .template_border {
   position: absolute;
-  top: 24mm;
-  left: 32mm;
+  top: var(--top);
+  left: var(--left);
   border: 1px solid;
   height: var(--height_2);
   width: var(--width);
