@@ -104,10 +104,11 @@ export default {
       }
     },
     check_space_left(current, template) {
-      console.log(current.templates_on_page)
       console.log('HEEHE')
       let max_left_col = 21
       let max_right_col = 21
+      let from_left = 32
+
       for (let space of current.filled) {
         if (space.left) {
           if (max_left_col < space.end_pos) {
@@ -121,11 +122,27 @@ export default {
         }
       }
 
-      let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm')
-      current.templates_on_page.push(new_templ)
       if (template.columns === 2) {
+        from_left = 32
+        let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+        current.templates_on_page.push(new_templ)
+
         let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
         current.filled.push(new_filled_space)
+      } else {
+          if (max_right_col < max_left_col) {
+            from_left = 85 + 32
+            let new_filled_space = new space_info(false, true, max_right_col, max_right_col+template.height+6+3)
+            current.filled.push(new_filled_space)
+            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_right_col + 3)+'mm', String(from_left) + 'mm')
+            current.templates_on_page.push(new_templ)
+          } else {
+            from_left = 32
+            let new_filled_space = new space_info(true, false, max_left_col, max_left_col+template.height+6+3)
+            current.filled.push(new_filled_space)
+            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+            current.templates_on_page.push(new_templ)
+          }
       }
       return current
     },

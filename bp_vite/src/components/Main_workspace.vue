@@ -29,9 +29,9 @@
    <div id="cross"></div>
    <div id="cross_2"></div>
 
-   <div v-for="c_S in $store.state.inf.pages">
+   <!--<div v-for="c_S in $store.state.inf.pages">
      <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
-   </div>
+   </div>-->
 
   <!--
    <div v-for="c_S in $store.state.inf.pages">

@@ -6,12 +6,12 @@ export default class template_info {
     image : string = '';
     text : string = '';
     from_top: string;
-    from_left: string = '32mm';
+    from_left: string;
 
-    constructor(id : number, t_t : template_sizes, from_top : string) {
+    constructor(id : number, t_t : template_sizes, from_top : string, from_left: string) {
         this.id_templatu = id
         this.template_type = t_t
         this.from_top = from_top
-        //this.from_left = from_left
+        this.from_left = from_left
     }
 }
