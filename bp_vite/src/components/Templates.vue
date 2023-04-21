@@ -39,23 +39,53 @@ export default {
           }
           case Img2: {
             console.log('2')
-            this.check_space_left(cur_page, this.$store.state.templ_1_2)
+            if (man_auto) {
+              for (let i = 0; i < 2; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_1_2)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_1_2)
+            }
             break;
           }
           case Img3: {
-            this.check_space_left(cur_page, this.$store.state.templ_1_3)
+            if (man_auto) {
+              for (let i = 0; i < 3; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_1_3)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_1_3)
+            }
             break;
           }
           case Img4: {
-            this.check_space_left(cur_page, this.$store.state.templ_1_4)
+            if (man_auto) {
+              for (let i = 0; i < 4; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_1_4)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_1_4)
+            }
             break;
           }
           case Img6: {
-            this.check_space_left(cur_page, this.$store.state.templ_1_6)
+            if (man_auto) {
+              for (let i = 0; i < 6; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_1_6)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_1_6)
+            }
             break;
           }
           case Img8: {
-            this.check_space_left(cur_page, this.$store.state.templ_1_8)
+            if (man_auto) {
+              for (let i = 0; i < 8; i++) {
+                this.check_space_left(cur_page, this.$store.state.templ_1_8)
+              }
+            } else {
+              this.check_space_left(cur_page, this.$store.state.templ_1_8)
+            }
             break;
           }
           case Img_P_1: {
@@ -79,6 +109,7 @@ export default {
             break;
           }
           case Img_T_1: {
+            this.check_space_left(cur_page, this.$store.state.templ_t_1_1)
             break;
           }
         }
@@ -124,6 +155,7 @@ export default {
 
       if (template.columns === 2) {
         from_left = 32
+        if (this.check_overflow(template, max_left_col)) return false
         let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
         current.templates_on_page.push(new_templ)
 
@@ -132,12 +164,14 @@ export default {
       } else {
           if (max_right_col < max_left_col) {
             from_left = 85 + 32
+            if (this.check_overflow(template, max_right_col)) return false
             let new_filled_space = new space_info(false, true, max_right_col, max_right_col+template.height+6+3)
             current.filled.push(new_filled_space)
             let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_right_col + 3)+'mm', String(from_left) + 'mm')
             current.templates_on_page.push(new_templ)
           } else {
             from_left = 32
+            if (this.check_overflow(template, max_left_col)) return false
             let new_filled_space = new space_info(true, false, max_left_col, max_left_col+template.height+6+3)
             current.filled.push(new_filled_space)
             let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
@@ -145,6 +179,12 @@ export default {
           }
       }
       return current
+    },
+    check_overflow(template, max) {
+      if (template.height + max > 289) {
+        console.log('Nelze vložit, byla přesažena maximální velikost stránky.')
+        return true
+      }
     },
     handleClick(event, img) {
       if (this.ctrlPressed) {
