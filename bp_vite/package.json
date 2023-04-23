@@ -2,8 +2,8 @@
   "name": "bp_vite",
   "version": "2.0.0",
   "main": "dist-electron/main/index.js",
-  "description": "Really simple Electron + Vue + Vite boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "description": "Aplikace pro tvorbu spisových stránek",
+  "author": "Jan Kleisl",
   "license": "MIT",
   "private": true,
   "keywords": [

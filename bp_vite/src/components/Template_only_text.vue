@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  props: ['sizes', 'spacing'],
+  props: ['sizes', 'spacing']
 }
 
 </script>
