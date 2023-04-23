@@ -182,13 +182,13 @@ export default {
         if (this.check_overflow(template, max_left_col)) return false
         if (template.has_text) {
           if (template.side_text) {
-            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+            let new_templ = new template_info(this.$store.state.inf.template_cnt_model++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
             current.templates_on_page.push(new_templ)
 
             let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
             current.filled.push(new_filled_space)
           } else {
-            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+            let new_templ = new template_info(this.$store.state.inf.template_cnt_model++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
             current.templates_on_page.push(new_templ)
 
             let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3+template.text_height)
@@ -196,7 +196,7 @@ export default {
           }
 
         } else {
-          let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+          let new_templ = new template_info(this.$store.state.inf.template_cnt_model++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
           current.templates_on_page.push(new_templ)
 
           let new_filled_space = new space_info(true, true, max_left_col, max_left_col+template.height+6+3)
@@ -208,14 +208,14 @@ export default {
             if (this.check_overflow(template, max_right_col)) return false
             let new_filled_space = new space_info(false, true, max_right_col, max_right_col+template.height+6+3)
             current.filled.push(new_filled_space)
-            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_right_col + 3)+'mm', String(from_left) + 'mm')
+            let new_templ = new template_info(this.$store.state.inf.template_cnt_model++, template, String(max_right_col + 3)+'mm', String(from_left) + 'mm')
             current.templates_on_page.push(new_templ)
           } else {
             from_left = 32
             if (this.check_overflow(template, max_left_col)) return false
             let new_filled_space = new space_info(true, false, max_left_col, max_left_col+template.height+6+3)
             current.filled.push(new_filled_space)
-            let new_templ = new template_info(this.$store.state.template_cnt++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
+            let new_templ = new template_info(this.$store.state.inf.template_cnt_model++, template, String(max_left_col + 3)+'mm', String(from_left) + 'mm')
             current.templates_on_page.push(new_templ)
           }
       }

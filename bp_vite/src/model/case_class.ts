@@ -9,6 +9,7 @@ export default class case_info {
     pages: page_info[] = [];
     images: string[] = [];
     page_cnt_model: number = 0;
+    template_cnt_model: number = 1;
     constructor(c_j: string, c_e: string, c_v: string, j_v: string, j_z: string ) {
         this.c_jednaci = c_j;
         this.c_evidencni = c_e;
