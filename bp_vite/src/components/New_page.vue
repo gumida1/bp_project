@@ -16,11 +16,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      //chng_border : false
-    }
-  },
   props: ['p_c', 'new_p', 'index', 'list', 'is_active'],
   emits: ['clicked'],
   methods: {
