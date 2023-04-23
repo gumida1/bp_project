@@ -3,14 +3,22 @@
   <div :style="cssProps" class="template_border_P" @click="set_active">
     <div :style="cssProps" class="text_top_border_P">
     </div>
-    <div :style="cssProps" class="img_border_P">
+    <div :style="cssProps" class="img_border_P" @mouseenter="showIcons" @mouseleave="hideIcons" style="position: relative;">
       <img v-bind:src="spacing.image">
+      <div class="icons_P" v-show="showIconsFlag">
+        <a class="btn btn-sm btn-outline-success" @click="erase_photo">
+          <i class="bi bi bi-eraser-fill"></i>
+        </a>
+        <a class="btn btn-sm btn-outline-success" @click="erase_template">
+          <i class="bi bi-trash-fill" style="font-size: 15px; color: red"></i>
+        </a>
+      </div>
     </div>
     <div class="caption_img_P">
       {{name_img}}
     </div>
-    <div class="photo_index_P">
-      fotografie č. {{$store.state.image_cnt}}
+    <div class="photo_index_P" v-if="spacing.image_number != null && spacing.image_number !== -1">
+      fotografie č. {{spacing.image_number}}
     </div>
     <textarea placeholder="Zde je prostor pro popisný text" v-model="spacing.text"> </textarea>
   </div>
@@ -20,6 +28,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      showIconsFlag: false
+    }
+  },
   props: ['sizes', 'spacing'],
   computed: {
     cssProps() {
@@ -60,6 +73,35 @@ export default {
         }
       }
       console.log(this.spacing.is_active, this.$store.state.active_template)
+    },
+    showIcons() {
+      this.showIconsFlag = true;
+    },
+    hideIcons() {
+      this.showIconsFlag = false;
+    },
+    erase_photo() {
+      let num = 1
+      for (let page of this.$store.state.inf.pages) {
+        for (let template of page.templates_on_page) {
+          if (template === this.spacing) {
+            template.image = ''
+            template.image_number = null
+          }
+          if (template.image !== '') {
+            template.image_number = num
+            num++
+          }
+        }
+      }
+    },
+    erase_template() {
+      for (let page of this.$store.state.inf.pages) {
+        const index = page.templates_on_page.indexOf(this.spacing);
+        if (index > -1) {
+          page.templates_on_page.splice(index, 1);
+        }
+      }
     }
   }
 }
@@ -139,5 +181,15 @@ export default {
   right: 1mm;
 }
 
+.icons_P {
+  position: absolute;
+  top: 2mm;
+  right: 2mm;
+  //visibility: hidden;
+}
+
+.img_border:hover .icons_P {
+  visibility: visible;
+}
 
 </style>
