@@ -1,7 +1,7 @@
 <template>
  <div class="white_page">
    <div class="strana">
-     strana {{$store.state.store_act_index.toString().padStart(3, '0')}}/{{$store.state.page_cnt.toString().padStart(3, '0')}}
+     strana {{$store.state.store_act_index.toString().padStart(3, '0')}}/{{$store.state.inf.page_cnt_model.toString().padStart(3, '0')}}
    </div>
 
    <div class="foto_dokumentace">

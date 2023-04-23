@@ -14,9 +14,9 @@
 
     </div>
     <div class="list_pages">
-      <New_page v-for="index in $store.state.page_cnt" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
+      <New_page v-for="index in $store.state.inf.page_cnt_model" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
     </div>
-    <New_page :p_c="$store.state.page_cnt" :new_p="true" @click="$store.commit('add_new_page'); new_page();"/>
+    <New_page :p_c="$store.state.inf.page_cnt_model" :new_p="true" @click="$store.commit('add_new_page'); new_page();"/>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
       this.active_index = index
     },
     next_page() {
-      if (this.active_index !== this.$store.state.page_cnt) {
+      if (this.active_index !== this.$store.state.inf.page_cnt_model) {
         this.active_index++
       }
     },
