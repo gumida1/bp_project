@@ -40,10 +40,17 @@ export default {
 
     },
     add_image_in_active_templ(path) {
+      let num = 1
       for (let page of this.$store.state.inf.pages) {
         for (let template of page.templates_on_page) {
+          if (template.image !== '' ) {
+            template.image_number = num
+            num++
+          }
           if (template.is_active) {
             template.image = path
+            template.image_number = num
+            num++
           }
         }
       }

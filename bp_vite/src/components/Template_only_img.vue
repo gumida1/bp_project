@@ -1,19 +1,32 @@
 <template>
   <div :style="cssProps" class="template_border" @click="set_active">
-    <div :style="cssProps" class="img_border">
+    <div :style="cssProps" class="img_border" @mouseover="showIcons" @mouseleave="hideIcons">
       <img v-bind:src="spacing.image">
+      <div class="icons" v-show="showIconsFlag">
+        <a class="btn btn-sm btn-outline-success" @click="erase_photo">
+          <i class="bi bi bi-eraser-fill"></i>
+        </a>
+        <a class="btn btn-sm btn-outline-success" @click="erase_template">
+          <i class="bi bi-trash-fill" style="font-size: 15px; color: red"></i>
+        </a>
+      </div>
     </div>
     <div class="caption_img">
       {{name_img}}
     </div>
-    <div class="photo_index">
-      fotografie č. {{spacing.id_templatu}}
+    <div class="photo_index" v-if="spacing.image_number != null && spacing.image_number !== -1">
+      fotografie č. {{spacing.image_number}}
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      showIconsFlag: false
+    }
+  },
   props: ['sizes', 'spacing'],
   computed: {
     cssProps() {
@@ -45,6 +58,35 @@ export default {
         }
       }
       console.log(this.spacing.is_active, this.$store.state.active_template)
+    },
+    showIcons() {
+      this.showIconsFlag = true;
+    },
+    hideIcons() {
+      this.showIconsFlag = false;
+    },
+    erase_photo() {
+      let num = 1
+      for (let page of this.$store.state.inf.pages) {
+        for (let template of page.templates_on_page) {
+          if (template === this.spacing) {
+            template.image = ''
+            template.image_number = null
+          }
+          if (template.image !== '') {
+            template.image_number = num
+            num++
+          }
+        }
+      }
+    },
+    erase_template() {
+      for (let page of this.$store.state.inf.pages) {
+        const index = page.templates_on_page.indexOf(this.spacing);
+        if (index > -1) {
+          page.templates_on_page.splice(index, 1);
+        }
+      }
     }
   }
 }
@@ -99,6 +141,17 @@ export default {
   color: #000;
   text-align: right;
   right: 1mm;
+}
+
+.icons {
+  position: absolute;
+  top: 2mm;
+  right: 2mm;
+  visibility: hidden;
+}
+
+.img_border:hover .icons {
+  visibility: visible;
 }
 
 </style>

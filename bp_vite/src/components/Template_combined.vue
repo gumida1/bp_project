@@ -10,7 +10,7 @@
       {{name_img}}
     </div>
     <div class="photo_index_P">
-      fotografie č. {{spacing.id_templatu}}
+      fotografie č. {{$store.state.image_cnt}}
     </div>
     <textarea placeholder="Zde je prostor pro popisný text" v-model="spacing.text"> </textarea>
   </div>

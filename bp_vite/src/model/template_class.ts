@@ -8,6 +8,7 @@ export default class template_info {
     from_top: string;
     from_left: string;
     is_active : boolean = false;
+    image_number : any = null
 
     constructor(id : number, t_t : template_sizes, from_top : string, from_left: string) {
         this.id_templatu = id
