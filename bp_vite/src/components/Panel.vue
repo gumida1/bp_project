@@ -7,16 +7,16 @@
         <input type="text" class="form-control form-control-sm" id="input1" placeholder="Číslo jednací" v-model="$store.state.inf.c_jednaci" :disabled="locked === false">
 
         <label for="input2">Evidenční číslo</label>
-        <input type="text" class="form-control form-control-sm" id="input2" placeholder="Evidenční číslo" v-model="$store.state.inf.c_evidencni" :disabled="locked === false || $store.vyj_filled === true" v-on:input="$store.commit('check_filled_input_evi')">
+        <input type="text" class="form-control form-control-sm" id="input2" placeholder="Evidenční číslo" v-model="$store.state.inf.c_evidencni" :disabled="locked === false || vyj_filled === true" v-on:input="check_filled_input_evi()">
 
         <label for="input3">Číslo výjezdu</label>
-        <input type="text" class="form-control form-control-sm" id="input3" placeholder="Číslo výjezdu" v-model="$store.state.inf.c_vyjezdu" :disabled="locked === false || $store.evi_filled === true" v-on:input="$store.commit('check_filled_input_vyj')">
+        <input type="text" class="form-control form-control-sm" id="input3" placeholder="Číslo výjezdu" v-model="$store.state.inf.c_vyjezdu" :disabled="locked === false || evi_filled === true" v-on:input="check_filled_input_vyj()">
 
         <label for="input4">Vyhotovil (fotograf)</label>
-        <input type="text" class="form-control form-control-sm" id="input4" placeholder="Vyhotovil" v-model="$store.state.inf.j_vyhotovitel" :disabled="locked === false" @dblclick="$store.commit('fill_vyhotovil')">
+        <input type="text" class="form-control form-control-sm" id="input4" placeholder="Vyhotovil" v-model="$store.state.inf.j_vyhotovitel" :disabled="locked === false" @dblclick="fill_vyhotovil()">
 
         <label for="input5">Zpracoval (kompiloval)</label>
-        <input type="text" class="form-control form-control-sm" id="input5" placeholder="Zpracoval" v-model="$store.state.inf.j_zpracovatel" :disabled="locked === false" @dblclick="$store.commit('fill_zpracoval')">
+        <input type="text" class="form-control form-control-sm" id="input5" placeholder="Zpracoval" v-model="$store.state.inf.j_zpracovatel" :disabled="locked === false" @dblclick="fill_zpracoval()">
       </div>
       <br>
       <div class="mx-auto" style="width: 123px;">
@@ -33,10 +33,29 @@ export default {
   data() {
     return {
       locked: true,
+      evi_filled: false,
+      vyj_filled: false
+    }
+  },
+  methods: {
+    check_filled_input_evi() {
+      this.evi_filled = this.$store.state.inf.c_evidencni !== '';
+    },
+    check_filled_input_vyj() {
+      this.vyj_filled = this.$store.state.inf.c_vyjezdu !== '';
+    },
+    fill_vyhotovil() {
+      if (this.$store.state.inf.j_zpracovatel !== '') {
+        this.$store.state.inf.j_vyhotovitel = this.$store.state.inf.j_zpracovatel
+      }
+    },
+    fill_zpracoval() {
+      if (this.$store.state.inf.j_vyhotovitel !== '') {
+        this.$store.state.inf.j_zpracovatel = this.$store.state.inf.j_vyhotovitel
+      }
     }
   }
 }
-
 </script>
 
 

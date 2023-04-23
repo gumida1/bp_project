@@ -29,7 +29,7 @@ export default createStore({
         templ_t_1_1 : new template_sizes_text(259,167,2, true, 259, 167, true),
     },
     mutations: {
-        check_filled_input_evi(state) {
+        /*check_filled_input_evi(state) {
             //state.evi_filled = state.inf.c_evidencni !== '';
             if (state.inf.c_evidencni !== '') {
                 state.evi_filled = true
@@ -50,7 +50,7 @@ export default createStore({
             if (state.inf.j_vyhotovitel !== '') {
                 state.inf.j_zpracovatel = state.inf.j_vyhotovitel
             }
-        },
+        },*/
         print_state(state) {
             console.log(state.evi_filled)
             console.log(state.vyj_filled)

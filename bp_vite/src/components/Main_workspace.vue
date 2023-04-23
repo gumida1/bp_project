@@ -8,11 +8,22 @@
      Fotografická dokumentace k: <br>
      <h5>
        č. j.<br>
-       e. č.
+       <div v-if="$store.state.inf.c_evidencni !== ''">
+         e. č.
+       </div>
+       <div v-else-if="$store.state.inf.c_vyjezdu !== ''">
+         č. v.
+       </div>
      </h5>
      <h3>
        {{$store.state.inf.c_jednaci}} <br>
-       {{$store.state.inf.c_evidencni}}
+       <div v-if="$store.state.inf.c_evidencni !== ''">
+         {{$store.state.inf.c_evidencni}}
+       </div>
+       <div v-else-if="$store.state.inf.c_vyjezdu !== ''">
+         {{$store.state.inf.c_vyjezdu}}
+       </div>
+
      </h3>
 
    </div>
