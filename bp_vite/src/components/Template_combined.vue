@@ -125,6 +125,7 @@ export default {
   border-bottom: 1px solid;
   height: var(--height);
   width: var(--width_3);
+
 }
 
 .text_top_border_P {

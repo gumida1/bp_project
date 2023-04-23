@@ -45,7 +45,10 @@
    <div v-for="c_S in $store.state.inf.pages">
      <div v-if="c_S.c_stranky === $store.state.store_act_index">
        <div v-for="templ in c_S.templates_on_page">
-         <div v-if="!(templ.template_type.has_text)">
+         <div v-if="(templ.template_type.height === 265)">
+          <Template_only_text :spacing="templ"/>
+         </div>
+         <div v-else-if="!(templ.template_type.has_text)">
            <Template_only_img :sizes="templ.template_type" :spacing="templ"/>
          </div>
          <div v-else-if="templ.template_type.has_text">
@@ -68,10 +71,11 @@
 <script>
 import Template_only_img from './Template_only_img.vue'
 import Template_combined from './Template_combined.vue'
+import Template_only_text from './Template_only_text.vue'
 
 export default {
   props: ['inf'],
-  components: { Template_only_img, Template_combined }
+  components: { Template_only_img, Template_combined, Template_only_text }
 }
 
 </script>

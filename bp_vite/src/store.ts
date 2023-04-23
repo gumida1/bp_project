@@ -26,7 +26,7 @@ export default createStore({
         templ_p_1_2_b : new template_sizes_text(125,167,2, true, 125, 47, true),
         templ_p_1_3 : new template_sizes_text(80.33,167,2, true, 80.33, 47, true),
         templ_p_1_4 : new template_sizes_text(58,167,2, true, 58, 47, true),
-        templ_t_1_1 : new template_sizes_text(259,167,2, true, 259, 167, true),
+        templ_t_1_1 : new template_sizes_text(265,167,2, true, 259, 167, true),
     },
     mutations: {
         /*check_filled_input_evi(state) {
