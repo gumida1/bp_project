@@ -137,6 +137,8 @@ export default {
   margin: 0 0 0 18mm;
   top: 3.4mm;
   position: absolute;
+  hyphens: none !important;
+  white-space: nowrap;
 }
 
 .logo_class {
