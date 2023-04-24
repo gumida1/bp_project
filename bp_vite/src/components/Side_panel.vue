@@ -2,7 +2,7 @@
   <div class="side_panel">
     <h6 @click="debug_images">Náhledy fotografií</h6>
     <br>
-    <button @click="open_dialog">Ctrl + O</button>
+    <button @click="open_dialog">Otevřít fotografie</button>
 
     <ul class="list-group list-group-flush">
       <li class="list-group-item" v-for="path in $store.state.inf.images" :key="path" @click="add_image_in_active_templ(path)">
