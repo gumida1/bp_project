@@ -16,6 +16,9 @@
       <a class="btn btn-sm btn-outline-success" @click="save_spis()">
         <i class="bi bi-save2-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
+      <a class="btn btn-sm btn-outline-success" @click="open_spis()">
+        <i class="bi bi-folder2-open" style="font-size: 15px; color: #081f37"></i>
+      </a>
 
 
     </div>
@@ -72,6 +75,14 @@ export default {
         console.log('Received result:', result);
 
       });
+    },
+    open_spis() {
+      ipcRenderer.invoke("showDialog_2")
+      ipcRenderer.once('dialogResult_2', (event, result) => {
+        console.log('Received result:', result);
+
+      });
+
     }
   }
 }

@@ -253,3 +253,27 @@ ipcMain.handle("saveDialog", async (e, serialized, images) => {
     return null;
   }
 });
+
+/* -- otevirani .sps -- */
+ipcMain.handle("showDialog_2", async (e, message) => {
+  try {
+    const result = await dialog.showOpenDialog({ properties: ['openFile'],filters: [{ name: 'Spis', extensions: ['sps'] }] });
+    console.log("result", result)
+    let copiedFilePaths = []
+
+    if (!result.canceled && result.filePaths.length > 0) {
+      
+      console.log('tady:', copiedFilePaths)
+      e.sender.send('dialogResult_2', copiedFilePaths); // send the result back to the renderer process
+      return result
+    } else {
+      // Return null if the user cancelled the dialog
+      return null
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+});
+
+
