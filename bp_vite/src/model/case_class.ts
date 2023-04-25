@@ -17,4 +17,19 @@ export default class case_info {
         this.j_vyhotovitel = j_v;
         this.j_zpracovatel = j_z;
     }
+
+    toJSON(): any {
+        return {
+            c_jednaci: this.c_jednaci,
+            c_evidencni: this.c_evidencni,
+            c_vyjezdu: this.c_vyjezdu,
+            j_vyhotovitel: this.j_vyhotovitel,
+            j_zpracovatel: this.j_zpracovatel,
+            pages: this.pages,
+            images: this.images,
+            page_cnt_model: this.page_cnt_model,
+            template_cnt_model: this.template_cnt_model,
+        };
+    }
+
 }

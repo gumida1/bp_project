@@ -5,6 +5,9 @@ import { join } from 'node:path'
 //const fs = require('fs')
 const path = require('path')
 const fs = require('fs-extra');
+const archiver = require('archiver');
+const rimraf = require('rimraf');
+const { createWriteStream } = require('archiver');
 
 // The built directory structure
 //
@@ -176,6 +179,74 @@ ipcMain.handle("showDialog", async (e, message) => {
     } else {
       // Return null if the user cancelled the dialog
       return null
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+});
+
+ipcMain.handle("saveDialog", async (e, serialized, images) => {
+  try {
+    const result = await dialog.showOpenDialog({
+      properties: ["openDirectory"], // set the dialog properties to only allow selection of a directory
+    });
+
+    if (!result.canceled) {
+      const selectedPath = result.filePaths[0]; // get the selected path
+      const savePath = selectedPath + '/save_case/case.json'; // set the file path to the save_case folder
+      fs.mkdirSync(selectedPath + '/save_case'); // create the save_case folder
+
+      images.forEach((imagePath) => {
+        const imageName = path.basename(imagePath);
+        const saveImagePath = selectedPath + '/save_case/' + imageName;
+        fs.copyFile(imagePath, saveImagePath, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log("Image " + imagePath + " copied successfully to " + saveImagePath);
+        });
+      });
+
+
+      fs.writeFile(savePath, serialized, (err) => { // write the file to the save_case folder
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log("File saved successfully!");
+      });
+
+
+      const folderPath = selectedPath + '/save_case';
+      const zipStream = fs.createWriteStream(folderPath + '.zip');
+
+      const archive = archiver('zip', {
+        zlib: { level: 9 } // set compression level to maximum
+      });
+      archive.pipe(zipStream);
+
+      archive.directory(folderPath, false);
+
+      archive.finalize().then(() => {
+        // rename the zip file to .sps extension
+        fs.rename(folderPath + '.zip', folderPath + '.sps', (err) => {
+          if (err) {
+            console.error('Failed to rename zip file:', err);
+          } else {
+            console.log('Successfully compressed and renamed the folder.');
+          }
+        });
+      }).catch((err) => {
+        console.error('Failed to compress the folder:', err);
+      });
+      
+      e.sender.send('saveDialogResult', savePath); // send the result back to the renderer process
+      return savePath;
+    } else {
+      // Return null if the user cancelled the dialog
+      return null;
     }
   } catch (error) {
     console.error(error);

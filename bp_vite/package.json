@@ -38,11 +38,13 @@
     "vue-tsc": "^1.1.7"
   },
   "dependencies": {
+    "archiver": "^5.3.1",
     "bootstrap": "^5.3.0-alpha1",
     "bootstrap-icons": "^1.10.4",
     "bootstrap-switch-button": "^1.1.0",
     "framework7": "^7.1.5",
     "framework7-vue": "^7.1.5",
+    "rimraf": "^5.0.0",
     "sass": "^1.59.3",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"

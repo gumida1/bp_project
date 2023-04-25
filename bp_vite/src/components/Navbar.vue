@@ -12,6 +12,12 @@
         <i class="bi bi-arrow-right-square-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
 
+
+      <a class="btn btn-sm btn-outline-success" @click="save_spis()">
+        <i class="bi bi-save2-fill" style="font-size: 15px; color: #081f37"></i>
+      </a>
+
+
     </div>
     <div class="list_pages">
       <New_page v-for="index in $store.state.inf.page_cnt_model" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
@@ -23,6 +29,8 @@
 <script>
 import New_page from './New_page.vue'
 import page_info  from '../model/page_class'
+import fs from "node:fs";
+import {ipcRenderer} from "electron";
 export default {
   components: { New_page },
   data() {
@@ -52,6 +60,18 @@ export default {
       if (this.active_index !== 1) {
         this.active_index--
       }
+    },
+    save_spis() {
+      const serialized = JSON.stringify(this.$store.state.inf, null, 2);
+      let arr_images = []
+      for (let img of this.$store.state.inf.images) {
+        arr_images.push(img)
+      }
+      ipcRenderer.invoke("saveDialog", serialized, arr_images)
+      ipcRenderer.once('saveDialogResult', (event, result) => {
+        console.log('Received result:', result);
+
+      });
     }
   }
 }
