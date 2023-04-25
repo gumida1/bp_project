@@ -135,7 +135,7 @@ ipcMain.handle('open-win', (_, arg) => {
 //const { ipcMain, dialog } = require("electron");
 ipcMain.handle("showDialog", async (e, message) => {
   try {
-    const result = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] });
+    const result = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'],filters: [{ name: 'Images', extensions: ['jpg'] }] });
     console.log("result", result)
     let copiedFilePaths = []
 
@@ -241,7 +241,7 @@ ipcMain.handle("saveDialog", async (e, serialized, images) => {
       }).catch((err) => {
         console.error('Failed to compress the folder:', err);
       });
-      
+
       e.sender.send('saveDialogResult', savePath); // send the result back to the renderer process
       return savePath;
     } else {
