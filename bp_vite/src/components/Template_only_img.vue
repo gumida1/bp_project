@@ -36,7 +36,7 @@ export default {
         '--height_2' : this.sizes.height + 6 +'mm',
         '--top' : this.spacing.from_top,
         '--left' : this.spacing.from_left,
-        '--border-color': this.spacing.is_active ? 'red' : 'black',
+        '--border-color': this.spacing.is_active ? '#5fc9f3' : 'black',
         '--border-width': this.spacing.is_active ? '4px dashed' : '1px solid',
       }
     },

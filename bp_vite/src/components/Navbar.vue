@@ -2,25 +2,29 @@
   <div class="navbar" @click="debug_pages">
     <div class="nav_elements">
 
-      <a class="btn btn-sm btn-outline-success" @click="previous_page(); $store.commit('previous_page_store');">
+      <a class="btn btn-outline-warning" @click="previous_page(); $store.commit('previous_page_store');">
         <i class="bi bi-arrow-left-square-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
-      <a class="btn btn-sm btn-outline-success" @click="$store.commit('delete_page', {number: active_index}); delete_page();">
-        <i class="bi bi-trash-fill" style="font-size: 15px; color: red"></i>
-      </a>
-      <a class="btn btn-sm btn-outline-success" @click="next_page(); $store.commit('next_page_store');">
+
+      <a class="btn btn-outline-warning" @click="next_page(); $store.commit('next_page_store');">
         <i class="bi bi-arrow-right-square-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
 
     </div>
 
     <div class="save_open">
-      <a class="btn btn-sm btn-outline-success" @click="save_spis()">
+      <a class="btn btn-outline-success" @click="save_spis()">
         <i class="bi bi-download" style="font-size: 15px; color: #081f37"></i> Uložit
       </a>
-      <a class="btn btn-sm btn-outline-success" @click="open_spis()">
+      <a class="btn btn-outline-success" @click="open_spis()">
         <i class="bi bi-upload" style="font-size: 15px; color: #081f37"></i> Načíst
 
+      </a>
+    </div>
+
+    <div class="kos">
+      <a class="btn btn-outline-danger" @click="$store.commit('delete_page', {number: active_index}); delete_page();">
+        <i class="bi bi-trash-fill" style="font-size: 15px; color: red"></i> Smazat stranu
       </a>
     </div>
 
@@ -131,6 +135,12 @@ export default {
 .save_open {
   position: absolute;
   right: 5px;
+  top: 8px;
+}
+
+.kos {
+  position: absolute;
+  left: 14px;
   top: 8px;
 }
 
