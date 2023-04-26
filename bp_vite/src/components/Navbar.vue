@@ -12,16 +12,18 @@
         <i class="bi bi-arrow-right-square-fill" style="font-size: 15px; color: #081f37"></i>
       </a>
 
+    </div>
 
+    <div class="save_open">
       <a class="btn btn-sm btn-outline-success" @click="save_spis()">
-        <i class="bi bi-save2-fill" style="font-size: 15px; color: #081f37"></i>
+        <i class="bi bi-download" style="font-size: 15px; color: #081f37"></i> Uložit
       </a>
       <a class="btn btn-sm btn-outline-success" @click="open_spis()">
-        <i class="bi bi-folder2-open" style="font-size: 15px; color: #081f37"></i>
+        <i class="bi bi-upload" style="font-size: 15px; color: #081f37"></i> Načíst
+
       </a>
-
-
     </div>
+
     <div class="list_pages">
       <New_page v-for="index in $store.state.inf.page_cnt_model" :key="index" :new_p="false" :index="index" @clicked="foo" :is_active="is_active(index)"/>
     </div>
@@ -124,6 +126,29 @@ export default {
 .nav_elements {
   margin: auto;
   width: 21%;
-
 }
+
+.save_open {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+}
+
+.save_open a:first-child {
+  margin-right: 5px; /* adjust the value to your desired spacing */
+}
+
+.save_open a:last-child {
+  margin-left: 5px; /* adjust the value to your desired spacing */
+}
+
+.nav_elements a:first-child {
+  margin-right: 10px; /* adjust the value to your desired spacing */
+}
+
+.nav_elements a:last-child {
+  margin-left: 10px; /* adjust the value to your desired spacing */
+}
+
+
 </style>

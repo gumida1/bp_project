@@ -8,7 +8,7 @@
 
     <div class="card" v-if="new_p" style="background-color: #5fc9f3">
       <div v-if="new_p">
-        <i class="bi bi-plus-circle" style="font-size: 46px; color: #081f37"></i>
+        <i class="bi bi-plus-circle" style="font-size: 46px; color: #081f37;"></i>
       </div>
     </div>
   </div>
