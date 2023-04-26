@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const archiver = require('archiver');
 const rimraf = require('rimraf');
 const { createWriteStream } = require('archiver');
+const StreamZip = require('node-stream-zip');
 
 // The built directory structure
 //
@@ -259,12 +260,45 @@ ipcMain.handle("showDialog_2", async (e, message) => {
   try {
     const result = await dialog.showOpenDialog({ properties: ['openFile'],filters: [{ name: 'Spis', extensions: ['sps'] }] });
     console.log("result", result)
-    let copiedFilePaths = []
 
     if (!result.canceled && result.filePaths.length > 0) {
-      
-      console.log('tady:', copiedFilePaths)
-      e.sender.send('dialogResult_2', copiedFilePaths); // send the result back to the renderer process
+      const spsFilePath = result.filePaths[0];
+      const userDataPath = app.getPath('userData')
+      const imagesFolderPath = path.join(userDataPath, 'images')
+
+      // Check if the images folder exists, and create it if it doesn't
+      if (!fs.existsSync(imagesFolderPath)) {
+        fs.mkdirSync(imagesFolderPath)
+      }
+      const unzipPath = imagesFolderPath;
+
+      const zip = new StreamZip({
+        file: spsFilePath,
+        storeEntries: true
+      });
+
+      zip.on('ready', () => {
+        // Extract all entries in the archive to the unzipPath directory
+        zip.extract(null, unzipPath, (err, count) => {
+          if (err) {
+            console.error('Failed to extract archive:', err);
+          } else {
+            console.log(`Extracted ${count} entries to ${unzipPath}`);
+
+            // Read the extracted files and perform further operations
+            const fileNames = fs.readdirSync(unzipPath);
+            for (const fileName of fileNames) {
+              console.log(`Opening file ${fileName}`);
+              // Perform further operations on the extracted files
+            }
+          }
+
+          // Close the archive
+          zip.close();
+        });
+      });
+
+      e.sender.send('dialogResult_2', imagesFolderPath); // send the result back to the renderer process
       return result
     } else {
       // Return null if the user cancelled the dialog

@@ -80,6 +80,18 @@ export default {
       ipcRenderer.invoke("showDialog_2")
       ipcRenderer.once('dialogResult_2', (event, result) => {
         console.log('Received result:', result);
+        const fileData = fs.readFileSync(result + '/case.json', 'utf-8');
+        const jsonData = JSON.parse(fileData);
+
+        this.$store.state.inf.c_jednaci = jsonData.c_jednaci
+        this.$store.state.inf.c_evidencni = jsonData.c_evidencni
+        this.$store.state.inf.c_vyjezdu = jsonData.c_vyjezdu
+        this.$store.state.inf.j_vyhotovitel = jsonData.j_vyhotovitel
+        this.$store.state.inf.j_zpracovatel = jsonData.j_zpracovatel
+        this.$store.state.inf.pages = jsonData.pages;
+        this.$store.state.inf.images = jsonData.images;
+        this.$store.state.inf.page_cnt_model = jsonData.page_cnt_model;
+        this.$store.state.inf.template_cnt_model = jsonData.template_cnt_model;
 
       });
 
