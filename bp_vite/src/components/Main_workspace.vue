@@ -85,7 +85,7 @@ export default {
 .white_page {
   background-color : white;
   height: 100%;
-  border: 3px solid #081f37;
+  //border: 3px solid #081f37;
   //overflow: auto;
   position: relative;
 }

@@ -18,8 +18,15 @@
       </a>
       <a class="btn btn-outline-success" @click="open_spis()">
         <i class="bi bi-upload" style="font-size: 15px; color: #081f37"></i> Načíst
-
       </a>
+
+
+      <a class="btn btn-outline-success" @click="print_spis()">
+        <i class="bi bi-printer" style="font-size: 15px; color: #081f37"></i> Tisk
+      </a>
+
+
+
     </div>
 
     <div class="kos">
@@ -40,6 +47,8 @@ import New_page from './New_page.vue'
 import page_info  from '../model/page_class'
 import fs from "node:fs";
 import {ipcRenderer} from "electron";
+import html2pdf from "html2pdf.js";
+
 export default {
   components: { New_page },
   data() {
@@ -101,6 +110,15 @@ export default {
 
       });
 
+    },
+    print_spis() {
+      //ipcRenderer.send('print-component', 'print.pdf', '.nav_elements');
+      html2pdf(document.getElementById("print"), {
+        margin: 0,
+        html2canvas: { scale: 4 },jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: 'avoid-all' },
+        filename: "i-was-html.pdf",
+      });
     }
   }
 }

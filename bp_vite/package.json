@@ -44,6 +44,7 @@
     "bootstrap-switch-button": "^1.1.0",
     "framework7": "^7.1.5",
     "framework7-vue": "^7.1.5",
+    "html2pdf.js": "^0.10.1",
     "node-stream-zip": "^1.15.0",
     "rimraf": "^5.0.0",
     "sass": "^1.59.3",

@@ -20,16 +20,19 @@ export default defineComponent( {
 
 <template>
 <div class="app">
-  <div class="left_side">
+  <div class="left_side" >
     <Panel/>
     <Templates/>
   </div>
 
   <Side_panel/>
 
-  <div class="mid_center">
-    <Main_workspace/>
-  </div>
+
+    <div class="mid_center" id="print">
+      <Main_workspace/>
+    </div>
+
+
 
   <div class="botcorner">
     <Navbar/>
@@ -66,11 +69,17 @@ export default defineComponent( {
 }
 
 .mid_center {
-  transform: scale(0.74);
+  //transform: scale(0.74);
   transform-origin: top;
   width: 203mm;
   height: 297mm;
   //min-height: 297mm;
   margin: 0 auto;
 }
+
+.stoprocent {
+  height: 100%;
+  width: 100%;
+}
+
 </style>
