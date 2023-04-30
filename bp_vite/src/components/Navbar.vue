@@ -22,7 +22,7 @@
 
 
       <a class="btn btn-outline-success" @click="print_spis()">
-        <i class="bi bi-printer" style="font-size: 15px; color: #081f37"></i> Tisk
+        <i class="bi bi-printer" style="font-size: 15px; color: #081f37"></i> Export pdf
       </a>
 
 
