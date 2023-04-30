@@ -1,10 +1,14 @@
-<script lang="ts">
+<script>
 import {defineComponent} from "vue";
 import Panel from './components/Panel.vue'
 import Templates from './components/Templates.vue'
 import Navbar from './components/Navbar.vue'
 import Side_panel from './components/Side_panel.vue'
 import Main_workspace from './components/Main_workspace.vue'
+
+
+
+
 
 export default defineComponent( {
   name: 'App',
@@ -13,6 +17,8 @@ export default defineComponent( {
 
   }
 })
+
+
 
 //console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}!`)
 </script>
@@ -28,8 +34,17 @@ export default defineComponent( {
   <Side_panel/>
 
 
-    <div class="mid_center" id="print">
-      <Main_workspace/>
+    <div v-if="!($store.state.printing)" class="mid_center">
+      <Main_workspace :page="-1"/>
+    </div>
+    <div v-else>
+      <div id="print">
+        <div v-for="iterationIndex in $store.state.inf.page_cnt_model" :key="iterationIndex">
+          <div class="mid_center_print">
+            <Main_workspace :key="iterationIndex" :page="iterationIndex"/>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -43,14 +58,6 @@ export default defineComponent( {
 
 <style>
 @import '../node_modules/bootstrap-icons/font/bootstrap-icons';
-
-.topcorner{
-  position: absolute;
-  top:0;
-  left:0;
-  height: 87%;
-  float: left;
-}
 
 .botcorner{
   position: sticky;
@@ -69,17 +76,17 @@ export default defineComponent( {
 }
 
 .mid_center {
-  //transform: scale(0.74);
+  transform: scale(0.74);
   transform-origin: top;
   width: 203mm;
   height: 297mm;
-  //min-height: 297mm;
   margin: 0 auto;
 }
 
-.stoprocent {
-  height: 100%;
-  width: 100%;
+.mid_center_print {
+  width: 203mm;
+  height: 297mm;
+  margin: 0 auto;
 }
 
 </style>

@@ -48,6 +48,8 @@ import page_info  from '../model/page_class'
 import fs from "node:fs";
 import {ipcRenderer} from "electron";
 import html2pdf from "html2pdf.js";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export default {
   components: { New_page },
@@ -111,15 +113,30 @@ export default {
       });
 
     },
-    print_spis() {
-      //ipcRenderer.send('print-component', 'print.pdf', '.nav_elements');
+    async print_spis() {
+      this.$store.state.printing = true
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       html2pdf(document.getElementById("print"), {
         margin: 0,
-        html2canvas: { scale: 4 },jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'avoid-all' },
+        html2canvas: { scale: 4 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         filename: "i-was-html.pdf",
+      }).then(() => {
+        this.$store.state.printing = false;
       });
     }
+    /*save_pdf() {
+      console.log("asfdsdaf")
+      html2pdf(document.getElementById("print"), {
+        margin: 0,
+        html2canvas: { scale: 4 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        filename: "i-was-html.pdf",
+      }).then(() => {
+        this.$store.state.printing = false;
+      });
+    }*/
   }
 }
 

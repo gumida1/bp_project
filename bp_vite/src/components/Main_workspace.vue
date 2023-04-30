@@ -1,11 +1,11 @@
 <template>
  <div class="white_page">
    <div class="strana">
-     strana {{$store.state.store_act_index.toString().padStart(3, '0')}}/{{$store.state.inf.page_cnt_model.toString().padStart(3, '0')}}
+     strana {{active_page.toString().padStart(3, '0')}}/{{$store.state.inf.page_cnt_model.toString().padStart(3, '0')}}
    </div>
 
    <div class="foto_dokumentace">
-     Fotografická dokumentace k: <br>
+     Fotografická dokumentace k:<br>
      <h5>
        č. j.<br>
        <div v-if="$store.state.inf.c_evidencni !== ''">
@@ -23,9 +23,7 @@
        <div v-else-if="$store.state.inf.c_vyjezdu !== ''">
          {{$store.state.inf.c_vyjezdu}}
        </div>
-
      </h3>
-
    </div>
 
    <div class="vyhotovil_zpracoval">
@@ -33,17 +31,13 @@
      zpracoval: {{$store.state.inf.j_zpracovatel}}
    </div>
 
-
-
    <img class="logo_class" src="../assets/logo2.png">
 
    <div id="cross"></div>
    <div id="cross_2"></div>
 
-
-
    <div v-for="c_S in $store.state.inf.pages">
-     <div v-if="c_S.c_stranky === $store.state.store_act_index">
+     <div v-if="c_S.c_stranky === active_page">
        <div v-for="templ in c_S.templates_on_page">
          <div v-if="(templ.template_type.height === 265)">
           <Template_only_text :spacing="templ"/>
@@ -58,15 +52,8 @@
      </div>
    </div>
 
-   <!--<div v-for="c_S in $store.state.inf.pages">
-     <p v-if="c_S.c_stranky === $store.state.store_act_index">{{c_S}}</p>
-   </div>-->
-
  </div>
 </template>
-
-
-
 
 <script>
 import Template_only_img from './Template_only_img.vue'
@@ -74,12 +61,20 @@ import Template_combined from './Template_combined.vue'
 import Template_only_text from './Template_only_text.vue'
 
 export default {
-  props: ['inf'],
-  components: { Template_only_img, Template_combined, Template_only_text }
+  props: ['page'],
+  components: { Template_only_img, Template_combined, Template_only_text },
+  computed: {
+    active_page() {
+      if (this.page !== -1) {
+        return this.page;
+      } else {
+        return this.$store.state.store_act_index;
+      }
+    }
+  }
 }
 
 </script>
-
 
 <style>
 .white_page {
