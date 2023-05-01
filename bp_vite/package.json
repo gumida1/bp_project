@@ -62,6 +62,7 @@
   },
   "build": {
     "appId": "bp.project",
+    "icon": "./public/logo.ico",
     "win": {
       "target": "nsis"
     },
