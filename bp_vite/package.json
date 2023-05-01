@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "build": "npm i && vue-tsc --noEmit && vite build && electron-builder",
     "preview": "vite preview",
     "electron": "tsc && electron .",
     "dist": "build",
