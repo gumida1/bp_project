@@ -62,7 +62,7 @@
   },
   "build": {
     "appId": "bp.project",
-    "icon": "./public/logo.ico",
+    "icon": "./public/znak_jmk.ico",
     "win": {
       "target": "nsis"
     },
