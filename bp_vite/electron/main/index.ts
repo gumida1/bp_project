@@ -136,7 +136,7 @@ ipcMain.handle('open-win', (_, arg) => {
 //const { ipcMain, dialog } = require("electron");
 ipcMain.handle("showDialog", async (e, message) => {
   try {
-    const result = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'],filters: [{ name: 'Images', extensions: ['jpg'] }] });
+    const result = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'],filters: [{ name: 'Images', extensions: ['jpg', 'jpeg'] }] });
     console.log("result", result)
     let copiedFilePaths = []
 
