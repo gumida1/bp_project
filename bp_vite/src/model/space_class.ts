@@ -12,6 +12,4 @@ export default class space_info {
         this.end_pos = end_pos;
     }
 
-
-
 }

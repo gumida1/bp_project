@@ -152,6 +152,7 @@ export default {
   overflow:hidden;
 }
 .img_border_P img {
+  object-fit: cover;
   height: 100%;
   width: 100%;
   top: -1px;
