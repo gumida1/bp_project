@@ -20,9 +20,8 @@
         <i class="bi bi-upload" style="font-size: 15px; color: #081f37"></i> Načíst
       </a>
 
-
-      <a class="btn btn-outline-success" @click="print_spis()">
-        <i class="bi bi-printer" style="font-size: 15px; color: #081f37"></i> Export pdf
+      <a class="btn btn-outline-success" :class="{ 'disabled': isNotFilled }" @click="print_spis()">
+        <i class="bi bi-printer" :style="{ 'font-size': '15px', 'color': isNotFilled ? 'red' : '#081f37' }"></i> Export pdf
       </a>
 
 
@@ -56,6 +55,23 @@ export default {
   data() {
     return {
       active_index: 0
+    }
+  },
+  computed: {
+    isNotFilled() {
+      const jedn = this.$store.state.inf.c_jednaci;
+      const evi = this.$store.state.inf.c_evidencni;
+      const vyj = this.$store.state.inf.c_vyjezdu;
+      const vyhot = this.$store.state.inf.j_vyhotovitel;
+      const zprac = this.$store.state.inf.j_zpracovatel;
+
+      if ((jedn === '' || vyhot === '' || zprac === '') || (evi === '' && vyj === '')) {
+        this.$store.state.not_filled = true
+      } else {
+        this.$store.state.not_filled = false
+      }
+
+      return this.$store.state.not_filled
     }
   },
   methods: {
@@ -114,17 +130,21 @@ export default {
 
     },
     async print_spis() {
-      this.$store.state.printing = true
-      await new Promise(resolve => setTimeout(resolve, 500));
+      if (this.isNotFilled) {
+        // Handle the disabled state if needed
+        return;
+      }
+        this.$store.state.printing = true
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-      html2pdf(document.getElementById("print"), {
-        margin: 0,
-        html2canvas: { scale: 4 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        filename: "i-was-html.pdf",
-      }).then(() => {
-        this.$store.state.printing = false;
-      });
+        html2pdf(document.getElementById("print"), {
+          margin: 0,
+          html2canvas: { scale: 4 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+          filename: "spisova_dokumentace.pdf",
+        }).then(() => {
+          this.$store.state.printing = false;
+        });
     }
   }
 }
@@ -182,6 +202,11 @@ export default {
 
 .nav_elements a:last-child {
   margin-left: 10px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 
