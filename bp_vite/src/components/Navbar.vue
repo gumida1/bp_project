@@ -131,7 +131,6 @@ export default {
     },
     async print_spis() {
       if (this.isNotFilled) {
-        // Handle the disabled state if needed
         return;
       }
         this.$store.state.printing = true
