@@ -33,7 +33,6 @@ export default createStore({
             let tmp = new page_info(state.inf.page_cnt_model)
             state.inf.pages.push(tmp)
             state.store_act_index = state.inf.page_cnt_model
-            //console.log(state.inf.pages[0].c_stranky)
         },
         next_page_store(state) {
             if (state.store_act_index !== state.inf.page_cnt_model) {
@@ -50,7 +49,6 @@ export default createStore({
         },
         delete_page(state, number) {
             let flag = 0
-            console.log('MAZEME')
             for (let page of state.inf.pages) {
                 if (page.c_stranky === number.number) {
                     const index = state.inf.pages.indexOf(page);

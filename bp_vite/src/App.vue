@@ -7,9 +7,6 @@ import Side_panel from './components/Side_panel.vue'
 import Main_workspace from './components/Main_workspace.vue'
 
 
-
-
-
 export default defineComponent( {
   name: 'App',
   components: { Panel,  Templates, Navbar, Side_panel, Main_workspace },
@@ -18,9 +15,6 @@ export default defineComponent( {
   }
 })
 
-
-
-//console.log("[App.vue]", `Hello world from Electron ${process.versions.electron}!`)
 </script>
 
 

@@ -33,12 +33,10 @@ export default {
         console.log(cur_page)
         switch(img) {
           case Img1: {
-            console.log('1')
             this.check_space_left(cur_page, this.$store.state.templ_1_1)
             break;
           }
           case Img2: {
-            console.log('2')
             if (man_auto) {
               for (let i = 0; i < 2; i++) {
                 this.check_space_left(cur_page, this.$store.state.templ_1_2)
@@ -159,7 +157,6 @@ export default {
       }
     },
     check_space_left(current, template) {
-      console.log('HEEHE')
       let max_left_col = 21
       let max_right_col = 21
       let from_left = 32

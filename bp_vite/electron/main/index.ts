@@ -10,26 +10,14 @@ const rimraf = require('rimraf');
 const { createWriteStream } = require('archiver');
 const StreamZip = require('node-stream-zip');
 
-// The built directory structure
-//
-// ├─┬ dist-electron
-// │ ├─┬ main
-// │ │ └── index.js    > Electron-Main
-// │ └─┬ preload
-// │   └── index.js    > Preload-Scripts
-// ├─┬ dist
-// │ └── index.html    > Electron-Renderer
-//
 process.env.DIST_ELECTRON = join(__dirname, '..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL
   ? join(process.env.DIST_ELECTRON, '../public')
   : process.env.DIST
 
-// Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
 
-// Set application name for Windows 10+ notifications
 if (process.platform === 'win32') app.setAppUserModelId(app.getName())
 
 if (!app.requestSingleInstanceLock()) {
@@ -37,13 +25,8 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 
-// Remove electron security warnings
-// This warning only shows in development mode
-// Read more on https://www.electronjs.org/docs/latest/tutorial/security
-// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
-
 let win: BrowserWindow | null = null
-// Here, you can also use other preload
+
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
@@ -54,24 +37,19 @@ async function createWindow() {
     icon: './public/znak_jmk.ico',
     webPreferences: {
       preload,
-      // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
-      // Consider using contextBridge.exposeInMainWorld
-      // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
       nodeIntegration: true,
       contextIsolation: false,
     },
     autoHideMenuBar: true
   })
 
-  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
+  if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(url)
-    // Open devTool if the app is not packaged
     win.webContents.openDevTools()
   } else {
     win.loadFile(indexHtml)
   }
 
-  // Test actively push message to the Electron-Renderer
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
@@ -82,12 +60,10 @@ async function createWindow() {
     })
   })*/
 
-  // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith('https:')) shell.openExternal(url)
     return { action: 'deny' }
   })
-  // win.webContents.on('will-navigate', (event, url) => { }) #344
 }
 
 app.whenReady().then(createWindow)
@@ -99,7 +75,6 @@ app.on('window-all-closed', () => {
 
 app.on('second-instance', () => {
   if (win) {
-    // Focus on the main window if the user tried to open another
     if (win.isMinimized()) win.restore()
     win.focus()
   }
@@ -114,7 +89,6 @@ app.on('activate', () => {
   }
 })
 
-// New window example arg: new windows url
 ipcMain.handle('open-win', (_, arg) => {
   const childWindow = new BrowserWindow({
     webPreferences: {
@@ -142,11 +116,9 @@ ipcMain.handle("showDialog", async (e, message) => {
     let copiedFilePaths = []
 
     if (!result.canceled && result.filePaths.length > 0) {
-      // Get the path to the user's app data folder
       const userDataPath = app.getPath('userData')
       const imagesFolderPath = path.join(userDataPath, 'images')
 
-      // Check if the images folder exists, and create it if it doesn't
       if (!fs.existsSync(imagesFolderPath)) {
         fs.mkdirSync(imagesFolderPath)
       }
@@ -161,10 +133,9 @@ ipcMain.handle("showDialog", async (e, message) => {
               console.error(err);
               reject(err);
             } else {
-              console.log(`File ${filename} copied successfully!`);
+
               copiedFilePaths.push(destinationPath);
-              console.log(copiedFilePaths);
-              //$store.commit('save_image_path', {path: destinationPath})
+
               resolve(result);
             }
           });
@@ -173,17 +144,17 @@ ipcMain.handle("showDialog", async (e, message) => {
 
       await Promise.all(promises);
 
-      // Return the file paths to the renderer process
+
       const bpviteFilePaths = result.filePaths.map(filePath => `bpvite://${path.basename(filePath)}`)
-      console.log('tady:', copiedFilePaths)
-      e.sender.send('dialogResult', copiedFilePaths); // send the result back to the renderer process
+
+      e.sender.send('dialogResult', copiedFilePaths);
       return bpviteFilePaths
     } else {
-      // Return null if the user cancelled the dialog
+
       return null
     }
   } catch (error) {
-    console.error(error);
+
     return null;
   }
 });
@@ -191,28 +162,28 @@ ipcMain.handle("showDialog", async (e, message) => {
 ipcMain.handle("saveDialog", async (e, serialized, images) => {
   try {
     const result = await dialog.showOpenDialog({
-      properties: ["openDirectory"], // set the dialog properties to only allow selection of a directory
+      properties: ["openDirectory"],
     });
 
     if (!result.canceled) {
-      const selectedPath = result.filePaths[0]; // get the selected path
-      const savePath = selectedPath + '/save_case/case.json'; // set the file path to the save_case folder
-      fs.mkdirSync(selectedPath + '/save_case'); // create the save_case folder
+      const selectedPath = result.filePaths[0];
+      const savePath = selectedPath + '/save_case/case.json';
+      fs.mkdirSync(selectedPath + '/save_case');
 
       images.forEach((imagePath) => {
         const imageName = path.basename(imagePath);
         const saveImagePath = selectedPath + '/save_case/' + imageName;
         fs.copyFile(imagePath, saveImagePath, (err) => {
           if (err) {
-            console.error(err);
+
             return;
           }
-          console.log("Image " + imagePath + " copied successfully to " + saveImagePath);
+
         });
       });
 
 
-      fs.writeFile(savePath, serialized, (err) => { // write the file to the save_case folder
+      fs.writeFile(savePath, serialized, (err) => {
         if (err) {
           console.error(err);
           return;
@@ -225,14 +196,13 @@ ipcMain.handle("saveDialog", async (e, serialized, images) => {
       const zipStream = fs.createWriteStream(folderPath + '.zip');
 
       const archive = archiver('zip', {
-        zlib: { level: 9 } // set compression level to maximum
+        zlib: { level: 9 }
       });
       archive.pipe(zipStream);
 
       archive.directory(folderPath, false);
 
       archive.finalize().then(() => {
-        // rename the zip file to .sps extension
         fs.rename(folderPath + '.zip', folderPath + '.sps', (err) => {
           if (err) {
             console.error('Failed to rename zip file:', err);
@@ -244,10 +214,10 @@ ipcMain.handle("saveDialog", async (e, serialized, images) => {
         console.error('Failed to compress the folder:', err);
       });
 
-      e.sender.send('saveDialogResult', savePath); // send the result back to the renderer process
+      e.sender.send('saveDialogResult', savePath);
       return savePath;
     } else {
-      // Return null if the user cancelled the dialog
+
       return null;
     }
   } catch (error) {
@@ -267,7 +237,6 @@ ipcMain.handle("showDialog_2", async (e, message) => {
       const userDataPath = app.getPath('userData')
       const imagesFolderPath = path.join(userDataPath, 'images')
 
-      // Check if the images folder exists, and create it if it doesn't
       if (!fs.existsSync(imagesFolderPath)) {
         fs.mkdirSync(imagesFolderPath)
       }
@@ -279,30 +248,26 @@ ipcMain.handle("showDialog_2", async (e, message) => {
       });
 
       zip.on('ready', () => {
-        // Extract all entries in the archive to the unzipPath directory
+
         zip.extract(null, unzipPath, (err, count) => {
           if (err) {
-            console.error('Failed to extract archive:', err);
-          } else {
-            console.log(`Extracted ${count} entries to ${unzipPath}`);
 
-            // Read the extracted files and perform further operations
+          } else {
+
             const fileNames = fs.readdirSync(unzipPath);
             for (const fileName of fileNames) {
-              console.log(`Opening file ${fileName}`);
-              // Perform further operations on the extracted files
+
             }
           }
 
-          // Close the archive
           zip.close();
         });
       });
 
-      e.sender.send('dialogResult_2', imagesFolderPath); // send the result back to the renderer process
+      e.sender.send('dialogResult_2', imagesFolderPath);
       return result
     } else {
-      // Return null if the user cancelled the dialog
+
       return null
     }
   } catch (error) {

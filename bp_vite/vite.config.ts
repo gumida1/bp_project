@@ -6,7 +6,6 @@ import renderer from 'vite-plugin-electron-renderer'
 import pkg from './package.json'
 import * as path from "path";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   rmSync('dist-electron', { recursive: true, force: true })
 
@@ -19,7 +18,6 @@ export default defineConfig(({ command }) => {
       vue(),
       electron([
         {
-          // Main-Process entry file of the Electron App.
           entry: 'electron/main/index.ts',
           onstart(options) {
             if (process.env.VSCODE_DEBUG) {
@@ -42,8 +40,6 @@ export default defineConfig(({ command }) => {
         {
           entry: 'electron/preload/index.ts',
           onstart(options) {
-            // Notify the Renderer-Process to reload the page when the Preload-Scripts build is complete, 
-            // instead of restarting the entire Electron App.
             options.reload()
           },
           vite: {
@@ -58,7 +54,7 @@ export default defineConfig(({ command }) => {
           },
         }
       ]),
-      // Use Node.js API in the Renderer-process
+
       renderer({
         nodeIntegration: true,
       }),

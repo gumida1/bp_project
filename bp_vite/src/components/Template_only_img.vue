@@ -57,7 +57,6 @@ export default {
           }
         }
       }
-      console.log(this.spacing.is_active, this.$store.state.active_template)
     },
     showIcons() {
       this.showIconsFlag = true;

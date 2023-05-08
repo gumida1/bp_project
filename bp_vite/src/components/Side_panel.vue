@@ -1,6 +1,6 @@
 <template>
   <div class="side_panel">
-    <h6 @click="debug_images">Náhledy fotografií</h6>
+    <h6>Náhledy fotografií</h6>
     <br>
 
     <a class="btn btn-outline-success" @click="open_dialog">
@@ -34,13 +34,6 @@ export default {
           this.$store.commit('save_image_paths', {path: path})
         }
       });
-
-    //console.log(this.$store.state.inf)
-    },
-    debug_images() {
-      console.log(this.$store.state.inf.images)
-      console.log(process.versions.electron)
-
     },
     add_image_in_active_templ(path) {
       let num = 1

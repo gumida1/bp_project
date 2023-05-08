@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar" @click="debug_pages">
+  <div class="navbar">
     <div class="nav_elements">
 
       <a class="btn btn-outline-warning" @click="previous_page(); $store.commit('previous_page_store');">
@@ -126,17 +126,6 @@ export default {
         this.$store.state.printing = false;
       });
     }
-    /*save_pdf() {
-      console.log("asfdsdaf")
-      html2pdf(document.getElementById("print"), {
-        margin: 0,
-        html2canvas: { scale: 4 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        filename: "i-was-html.pdf",
-      }).then(() => {
-        this.$store.state.printing = false;
-      });
-    }*/
   }
 }
 
@@ -180,19 +169,19 @@ export default {
 }
 
 .save_open a:first-child {
-  margin-right: 5px; /* adjust the value to your desired spacing */
+  margin-right: 5px;
 }
 
 .save_open a:last-child {
-  margin-left: 5px; /* adjust the value to your desired spacing */
+  margin-left: 5px;
 }
 
 .nav_elements a:first-child {
-  margin-right: 10px; /* adjust the value to your desired spacing */
+  margin-right: 10px;
 }
 
 .nav_elements a:last-child {
-  margin-left: 10px; /* adjust the value to your desired spacing */
+  margin-left: 10px;
 }
 
 
